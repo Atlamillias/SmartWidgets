@@ -10,5 +10,8 @@ from smartwidgets.app import (
     on_exit,
     call_on_start,
     call_on_exit,
+    setup,
     run
 )
+from smartwidgets import registries, containers
+

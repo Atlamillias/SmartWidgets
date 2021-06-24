@@ -151,9 +151,7 @@ class Viewport:
 ## Common-use ##
 ################
 
-# should be split into two functions, seperating
-# 'setup' stuff from the main loop
-def run(viewport=None):
+def setup(viewport=None):
     if isinstance(viewport, (Viewport, str)):
         viewport = str(viewport)
     else:
@@ -165,12 +163,12 @@ def run(viewport=None):
     dpg.set_start_callback(lambda: [f() for f in call_on_start])
     dpg.set_exit_callback(lambda: [f() for f in call_on_exit])
 
+
+def run():
     while dpg.is_dearpygui_running():
         dpg.render_dearpygui_frame()
 
     dpg.cleanup_dearpygui()
-
-
 
 
 ################
