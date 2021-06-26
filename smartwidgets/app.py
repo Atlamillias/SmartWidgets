@@ -1,17 +1,100 @@
 from typing import Any
+from contextlib import contextmanager
 
 from dearpygui import core as dpg
 
-# app.py could really be bundled in
-# a class instead, and probably should be...
-# will consider
+from .containers import Window
+from .registries import (
+    FontRegistry, 
+    TextureRegistry, 
+    HandlerRegistry, 
+    ValueRegistry
+)
 
-call_on_start = set()
-call_on_exit = set()
 
 
-# DPG currently only allows 1 viewport per loop
+class Application:
+    on_start = []
+    on_exit = []
+
+    def __init__(self) -> None:
+        self.viewport = Viewport()
+
+        # Registries
+        self.__fonts = FontRegistry(id=dpg.mvReservedUUID_0)
+        self.__handlers = HandlerRegistry(id=dpg.mvReservedUUID_1)
+        self.__textures = TextureRegistry(id=dpg.mvReservedUUID_2, show=False)
+        self.__values = ValueRegistry(id=dpg.mvReservedUUID_3)
+
+        self._primary_window = None
+
+        self.viewport.setup()
+        self.viewport.show()
+
+    @staticmethod
+    def stop():
+        dpg.stop_dearpygui()
+
+    def run(self):
+        dpg.set_start_callback(lambda: [f() for f in self.on_start])
+        dpg.set_exit_callback(lambda: [f() for f in self.on_exit])
+
+        while dpg.is_dearpygui_running():
+            dpg.render_dearpygui_frame()
+
+        dpg.cleanup_dearpygui()
+
+
+    ## Decorators ##
+    def call_on_start(self, func):
+        """Adds <func> to a list of functions that will be
+        called before the main loop."""
+        self.on_start.append(func)
+
+        return func
+
+    def call_on_exit(self, func):
+        """Adds <func> to a list of functions that will be
+        called as the main loop ends."""
+        self.on_exit.append(func)
+
+        return func
+
+    
+    ## Misc. ##
+    @property
+    def time_elapsed(self):
+        return dpg.get_total_time()
+
+    @property
+    def global_font_scale(self):
+        return dpg.get_global_font_scale()
+
+    @global_font_scale.setter
+    def global_font_scale(self, value: float):
+        dpg.set_global_font_scale(value)
+
+    @property
+    def primary_window(self):
+        return self._primary_window
+
+    @primary_window.setter
+    def primary_window(self, window):
+        if isinstance(window, (Window, int)):
+            self._primary_window = window
+            dpg.set_primary_window(int(window),True)
+        elif window is None and self._primary_window:
+            dpg.set_primary_window(int(self._primary_window), False)
+            self._primary_window = window
+        else:
+            raise TypeError("Value must be of type <int>, <Window>.")
+
+
+
+
+
 class Viewport:
+    # Note: DPG currently only allows 1 viewport per loop
     __config = {}
 
     def __init__(
@@ -132,6 +215,9 @@ class Viewport:
         """Minimize the viewport."""
         dpg.minimize_viewport(self.__id)
 
+    def setup(self):
+        dpg.setup_dearpygui(viewport=self.__id)
+
     def show(self):
         """Display the viewport."""
         dpg.show_viewport(self.__id)
@@ -147,53 +233,15 @@ class Viewport:
 
 
 
-################
-## Common-use ##
-################
-
-def setup(viewport=None):
-    if isinstance(viewport, (Viewport, str)):
-        viewport = str(viewport)
-    else:
-        viewport = dpg.create_viewport()
-
-    dpg.setup_dearpygui(viewport=viewport)
-    dpg.show_viewport(viewport)
-
-    dpg.set_start_callback(lambda: [f() for f in call_on_start])
-    dpg.set_exit_callback(lambda: [f() for f in call_on_exit])
+## Misc. (most are copy/paste from dearpygui) ##
+@contextmanager
+def mutex():
+   try:
+       yield dpg.lock_mutex()
+   finally:
+       dpg.unlock_mutex()
 
 
-def run():
-    while dpg.is_dearpygui_running():
-        dpg.render_dearpygui_frame()
-
-    dpg.cleanup_dearpygui()
-
-
-################
-## Decorators ##
-################
-def on_start(func):
-    """Adds <func> to a list of functions that will be
-    called before the main loop."""
-    call_on_start.add(func)
-
-    return func
-
-def on_exit(func):
-    """Adds <func> to a list of functions that will be
-    called as the main loop ends."""
-    call_on_exit.add(func)
-
-    return func
-
-
-
-
-################
-##    Tools   ##
-################
 def show_style_editor(sender: str = "", data: Any = None):
     dpg.show_tool(dpg.mvTool_Style)
 

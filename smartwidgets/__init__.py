@@ -5,13 +5,8 @@ from dearpygui import core as dpg
 
 from smartwidgets.bases import Container, Widget
 from smartwidgets.app import (
+    Application,
     Viewport,
-    on_start,
-    on_exit,
-    call_on_start,
-    call_on_exit,
-    setup,
-    run
 )
-from smartwidgets import registries, containers
+from smartwidgets import registries, containers, widgets
 
