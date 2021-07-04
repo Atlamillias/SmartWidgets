@@ -1,77 +1,21 @@
-from typing import (
-    Callable,
-    Any,
-)
+from typing import Callable, Any
+from dearpygui import core as idpg
 
-from dearpygui import core
-
-from .bases import Widget
+from ._widget import Widget
 
 
-class HistogramSeries(Widget):
-    _command: Callable = core.add_2d_histogram_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        xbins: int = -1,
-        ybins: int = -1,
-        xmin_range: float = 0.0,
-        xmax_range: float = 1.0,
-        ymin_range: float = 0.0,
-        ymax_range: float = 1.0,
-        density: bool = False,
-        outliers: bool = True,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            xbins=xbins,
-            ybins=ybins,
-            xmin_range=xmin_range,
-            xmax_range=xmax_range,
-            ymin_range=ymin_range,
-            ymax_range=ymax_range,
-            density=density,
-            outliers=outliers,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.y = y
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.xbins = xbins
-        self.ybins = ybins
-        self.xmin_range = xmin_range
-        self.xmax_range = xmax_range
-        self.ymin_range = ymin_range
-        self.ymax_range = ymax_range
-        self.density = density
-        self.outliers = outliers
-        self.contribute_to_bounds = contribute_to_bounds
+##################################################
+## Note: this file was automatically generated. ##
+##################################################
 
 
-class ThiccSlider(Widget):
-    _command: Callable = core.add_3d_slider
+class Slider(Widget):
+    _command: Callable = idpg.add_3d_slider
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -87,7 +31,7 @@ class ThiccSlider(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[float] = [0.0,0.0,0.0,0.0],
+        default_value: list[float] = [0.0, 0.0, 0.0, 0.0],
         max_x: float = 100.0,
         max_y: float = 100.0,
         max_z: float = 100.0,
@@ -95,34 +39,40 @@ class ThiccSlider(Widget):
         min_y: float = 0.0,
         min_z: float = 0.0,
         scale: float = 1.0,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            max_x=max_x,
-            max_y=max_y,
-            max_z=max_z,
-            min_x=min_x,
-            min_y=min_y,
-            min_z=min_z,
-            scale=scale,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        max_x=max_x,
+        max_y=max_y,
+        max_z=max_z,
+        min_x=min_x,
+        min_y=min_y,
+        min_z=min_z,
+        scale=scale,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -147,90 +97,13 @@ class ThiccSlider(Widget):
         self.min_z = min_z
         self.scale = scale
 
-
-class AreaSeries(Widget):
-    _command: Callable = core.add_area_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        fill: list[int] = [0,0,0,-255],
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            fill=fill,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.y = y
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.fill = fill
-        self.contribute_to_bounds = contribute_to_bounds
-
-
-class BarSeries(Widget):
-    _command: Callable = core.add_bar_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        weight: float = 1.0,
-        horizontal: bool = False,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            weight=weight,
-            horizontal=horizontal,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.y = y
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.weight = weight
-        self.horizontal = horizontal
-        self.contribute_to_bounds = contribute_to_bounds
-
-
 class Button(Widget):
-    _command: Callable = core.add_button
+    _command: Callable = idpg.add_button
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -249,29 +122,35 @@ class Button(Widget):
         small: bool = False,
         arrow: bool = False,
         direction: int = 0,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            small=small,
-            arrow=arrow,
-            direction=direction,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        small=small,
+        arrow=arrow,
+        direction=direction,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -291,63 +170,33 @@ class Button(Widget):
         self.arrow = arrow
         self.direction = direction
 
-
-class CandleSeries(Widget):
-    _command: Callable = core.add_candle_series
+class CharRemap(Widget):
+    _command: Callable = idpg.add_char_remap
 
     def __init__(
         self,
-        dates: list[float],
-        opens: list[float],
-        closes: list[float],
-        lows: list[float],
-        highs: list[float],
+        source: int,
+        target: int,
         label: str = None,
         parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        bull_color: list[int] = [0,255,113,255],
-        bear_color: list[int] = [218,13,79,255],
-        weight: int = 0.25,
-        contribute_to_bounds: bool = True,
-        tooltip: bool = True,
+        **kwargs
     ):
         super().__init__(
-            dates=dates,
-            opens=opens,
-            closes=closes,
-            lows=lows,
-            highs=highs,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            bull_color=bull_color,
-            bear_color=bear_color,
-            weight=weight,
-            contribute_to_bounds=contribute_to_bounds,
-            tooltip=tooltip,
+        source=source,
+        target=target,
+        label=label,
+        parent=parent,
+        **kwargs
         )
-        self.dates = dates
-        self.opens = opens
-        self.closes = closes
-        self.lows = lows
-        self.highs = highs
+
+
+        self.source = source
+        self.target = target
         self.label = label
         self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.bull_color = bull_color
-        self.weight = weight
-        self.contribute_to_bounds = contribute_to_bounds
-        self.tooltip = tooltip
-
 
 class Checkbox(Widget):
-    _command: Callable = core.add_checkbox
+    _command: Callable = idpg.add_checkbox
 
     def __init__(
         self,
@@ -368,26 +217,30 @@ class Checkbox(Widget):
         tracked: bool = False,
         track_offset: float = 0.5,
         default_value: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        **kwargs
         )
+
+
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -406,14 +259,14 @@ class Checkbox(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
 
-
 class ColorButton(Widget):
-    _command: Callable = core.add_color_button
+    _command: Callable = idpg.add_color_button
 
     def __init__(
         self,
-        default_value: list[int] = [0,0,0,255],
+        default_value: list[int] = [0, 0, 0, 255],
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -432,31 +285,37 @@ class ColorButton(Widget):
         no_alpha: bool = False,
         no_border: bool = False,
         no_drag_drop: bool = False,
+        **kwargs
     ):
         super().__init__(
-            default_value=default_value,
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            no_alpha=no_alpha,
-            no_border=no_border,
-            no_drag_drop=no_drag_drop,
+        default_value=default_value,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        no_alpha=no_alpha,
+        no_border=no_border,
+        no_drag_drop=no_drag_drop,
+        **kwargs
         )
+
+
         self.default_value = default_value
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -476,14 +335,14 @@ class ColorButton(Widget):
         self.no_border = no_border
         self.no_drag_drop = no_drag_drop
 
-
 class ColorEdit(Widget):
-    _command: Callable = core.add_color_edit
+    _command: Callable = idpg.add_color_edit
 
     def __init__(
         self,
-        default_value: list[int] = [0,0,0,255],
+        default_value: list[int] = [0, 0, 0, 255],
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -509,58 +368,52 @@ class ColorEdit(Widget):
         no_label: bool = False,
         no_drag_drop: bool = False,
         alpha_bar: bool = False,
-        alpha_preview: bool = False,
-        alpha_preview_half: bool = False,
-        display_rgb: bool = False,
-        display_hsv: bool = False,
-        display_hex: bool = False,
-        uint8: bool = False,
-        floats: bool = False,
-        input_rgb: bool = False,
-        input_hsv: bool = False,
-        m_3component: bool = False,
+        alpha_preview: int = 0,
+        display_mode: int = 1048576,
+        display_type: int = 8388608,
+        input_mode: int = 134217728,
+        **kwargs
     ):
         super().__init__(
-            default_value=default_value,
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            no_alpha=no_alpha,
-            no_picker=no_picker,
-            no_options=no_options,
-            no_small_preview=no_small_preview,
-            no_inputs=no_inputs,
-            no_tooltip=no_tooltip,
-            no_label=no_label,
-            no_drag_drop=no_drag_drop,
-            alpha_bar=alpha_bar,
-            alpha_preview=alpha_preview,
-            alpha_preview_half=alpha_preview_half,
-            display_rgb=display_rgb,
-            display_hsv=display_hsv,
-            display_hex=display_hex,
-            uint8=uint8,
-            floats=floats,
-            input_rgb=input_rgb,
-            input_hsv=input_hsv,
-            m_3component=m_3component,
+        default_value=default_value,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        no_alpha=no_alpha,
+        no_picker=no_picker,
+        no_options=no_options,
+        no_small_preview=no_small_preview,
+        no_inputs=no_inputs,
+        no_tooltip=no_tooltip,
+        no_label=no_label,
+        no_drag_drop=no_drag_drop,
+        alpha_bar=alpha_bar,
+        alpha_preview=alpha_preview,
+        display_mode=display_mode,
+        display_type=display_type,
+        input_mode=input_mode,
+        **kwargs
         )
+
+
         self.default_value = default_value
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -587,24 +440,18 @@ class ColorEdit(Widget):
         self.no_drag_drop = no_drag_drop
         self.alpha_bar = alpha_bar
         self.alpha_preview = alpha_preview
-        self.alpha_preview_half = alpha_preview_half
-        self.display_rgb = display_rgb
-        self.display_hsv = display_hsv
-        self.display_hex = display_hex
-        self.uint8 = uint8
-        self.floats = floats
-        self.input_rgb = input_rgb
-        self.input_hsv = input_hsv
-        self.m_3component = m_3component
-
+        self.display_mode = display_mode
+        self.display_type = display_type
+        self.input_mode = input_mode
 
 class ColorPicker(Widget):
-    _command: Callable = core.add_color_picker
+    _command: Callable = idpg.add_color_picker
 
     def __init__(
         self,
-        default_value: list[int] = [0,0,0,255],
+        default_value: list[int] = [0, 0, 0, 255],
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -622,64 +469,62 @@ class ColorPicker(Widget):
         tracked: bool = False,
         track_offset: float = 0.5,
         no_alpha: bool = False,
-        no_picker: bool = False,
+        no_side_preview: bool = False,
         no_small_preview: bool = False,
         no_inputs: bool = False,
         no_tooltip: bool = False,
         no_label: bool = False,
         alpha_bar: bool = False,
-        alpha_preview: bool = False,
-        alpha_preview_half: bool = False,
         display_rgb: bool = False,
         display_hsv: bool = False,
         display_hex: bool = False,
-        uint8: bool = False,
-        floats: bool = False,
-        input_rgb: bool = False,
-        input_hsv: bool = False,
-        picker_hue_bar: bool = False,
-        picker_hue_wheel: bool = False,
+        picker_mode: int = 33554432,
+        alpha_preview: int = 0,
+        display_type: int = 8388608,
+        input_mode: int = 134217728,
+        **kwargs
     ):
         super().__init__(
-            default_value=default_value,
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            no_alpha=no_alpha,
-            no_picker=no_picker,
-            no_small_preview=no_small_preview,
-            no_inputs=no_inputs,
-            no_tooltip=no_tooltip,
-            no_label=no_label,
-            alpha_bar=alpha_bar,
-            alpha_preview=alpha_preview,
-            alpha_preview_half=alpha_preview_half,
-            display_rgb=display_rgb,
-            display_hsv=display_hsv,
-            display_hex=display_hex,
-            uint8=uint8,
-            floats=floats,
-            input_rgb=input_rgb,
-            input_hsv=input_hsv,
-            picker_hue_bar=picker_hue_bar,
-            picker_hue_wheel=picker_hue_wheel,
+        default_value=default_value,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        no_alpha=no_alpha,
+        no_side_preview=no_side_preview,
+        no_small_preview=no_small_preview,
+        no_inputs=no_inputs,
+        no_tooltip=no_tooltip,
+        no_label=no_label,
+        alpha_bar=alpha_bar,
+        display_rgb=display_rgb,
+        display_hsv=display_hsv,
+        display_hex=display_hex,
+        picker_mode=picker_mode,
+        alpha_preview=alpha_preview,
+        display_type=display_type,
+        input_mode=input_mode,
+        **kwargs
         )
+
+
         self.default_value = default_value
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -697,31 +542,27 @@ class ColorPicker(Widget):
         self.tracked = tracked
         self.track_offset = track_offset
         self.no_alpha = no_alpha
-        self.no_picker = no_picker
+        self.no_side_preview = no_side_preview
         self.no_small_preview = no_small_preview
         self.no_inputs = no_inputs
         self.no_tooltip = no_tooltip
         self.no_label = no_label
         self.alpha_bar = alpha_bar
-        self.alpha_preview = alpha_preview
-        self.alpha_preview_half = alpha_preview_half
         self.display_rgb = display_rgb
         self.display_hsv = display_hsv
         self.display_hex = display_hex
-        self.uint8 = uint8
-        self.floats = floats
-        self.input_rgb = input_rgb
-        self.input_hsv = input_hsv
-        self.picker_hue_bar = picker_hue_bar
-        self.picker_hue_wheel = picker_hue_wheel
-
+        self.picker_mode = picker_mode
+        self.alpha_preview = alpha_preview
+        self.display_type = display_type
+        self.input_mode = input_mode
 
 class ColormapScale(Widget):
-    _command: Callable = core.add_colormap_scale
+    _command: Callable = idpg.add_colormap_scale
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -732,21 +573,27 @@ class ColormapScale(Widget):
         default_value: int = 0,
         min_scale: float = 0.0,
         max_scale: float = 1.0,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            pos=pos,
-            default_value=default_value,
-            min_scale=min_scale,
-            max_scale=max_scale,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        show=show,
+        pos=pos,
+        default_value=default_value,
+        min_scale=min_scale,
+        max_scale=max_scale,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -758,14 +605,14 @@ class ColormapScale(Widget):
         self.min_scale = min_scale
         self.max_scale = max_scale
 
-
 class Combo(Widget):
-    _command: Callable = core.add_combo
+    _command: Callable = idpg.add_combo
 
     def __init__(
         self,
         items: list[str] = [],
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -783,42 +630,42 @@ class Combo(Widget):
         track_offset: float = 0.5,
         default_value: str = '',
         popup_align_left: bool = False,
-        height_small: bool = False,
-        height_regular: bool = False,
-        height_large: bool = False,
-        height_largest: bool = False,
         no_arrow_button: bool = False,
         no_preview: bool = False,
+        height_mode: int = 1,
+        **kwargs
     ):
         super().__init__(
-            items=items,
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            popup_align_left=popup_align_left,
-            height_small=height_small,
-            height_regular=height_regular,
-            height_large=height_large,
-            height_largest=height_largest,
-            no_arrow_button=no_arrow_button,
-            no_preview=no_preview,
+        items=items,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        popup_align_left=popup_align_left,
+        no_arrow_button=no_arrow_button,
+        no_preview=no_preview,
+        height_mode=height_mode,
+        **kwargs
         )
+
+
         self.items = items
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -836,16 +683,12 @@ class Combo(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
         self.popup_align_left = popup_align_left
-        self.height_small = height_small
-        self.height_regular = height_regular
-        self.height_large = height_large
-        self.height_largest = height_largest
         self.no_arrow_button = no_arrow_button
         self.no_preview = no_preview
-
+        self.height_mode = height_mode
 
 class DatePicker(Widget):
-    _command: Callable = core.add_date_picker
+    _command: Callable = idpg.add_date_picker
 
     def __init__(
         self,
@@ -863,27 +706,31 @@ class DatePicker(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: dict = {'month_day':14,'year':20,'month':5},
+        default_value: dict = {'month_day': 14, 'year': 20, 'month': 5},
         level: int = 0,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            level=level,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        level=level,
+        **kwargs
         )
+
+
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -901,13 +748,13 @@ class DatePicker(Widget):
         self.default_value = default_value
         self.level = level
 
-
 class DragFloat(Widget):
-    _command: Callable = core.add_drag_float
+    _command: Callable = idpg.add_drag_float
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -930,33 +777,39 @@ class DragFloat(Widget):
         max_value: float = 100.0,
         no_input: bool = False,
         clamped: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            format=format,
-            speed=speed,
-            min_value=min_value,
-            max_value=max_value,
-            no_input=no_input,
-            clamped=clamped,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        format=format,
+        speed=speed,
+        min_value=min_value,
+        max_value=max_value,
+        no_input=no_input,
+        clamped=clamped,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -980,13 +833,13 @@ class DragFloat(Widget):
         self.no_input = no_input
         self.clamped = clamped
 
-
 class DragFloatx(Widget):
-    _command: Callable = core.add_drag_floatx
+    _command: Callable = idpg.add_drag_floatx
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -1002,7 +855,7 @@ class DragFloatx(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[float] = [0.0,0.0,0.0,0.0],
+        default_value: list[float] = [0.0, 0.0, 0.0, 0.0],
         size: int = 4,
         format: str = '%0.3f',
         speed: float = 1.0,
@@ -1010,34 +863,40 @@ class DragFloatx(Widget):
         max_value: float = 100.0,
         no_input: bool = False,
         clamped: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            size=size,
-            format=format,
-            speed=speed,
-            min_value=min_value,
-            max_value=max_value,
-            no_input=no_input,
-            clamped=clamped,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        size=size,
+        format=format,
+        speed=speed,
+        min_value=min_value,
+        max_value=max_value,
+        no_input=no_input,
+        clamped=clamped,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -1062,13 +921,13 @@ class DragFloatx(Widget):
         self.no_input = no_input
         self.clamped = clamped
 
-
 class DragInt(Widget):
-    _command: Callable = core.add_drag_int
+    _command: Callable = idpg.add_drag_int
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -1091,33 +950,39 @@ class DragInt(Widget):
         max_value: int = 100,
         no_input: bool = False,
         clamped: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            format=format,
-            speed=speed,
-            min_value=min_value,
-            max_value=max_value,
-            no_input=no_input,
-            clamped=clamped,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        format=format,
+        speed=speed,
+        min_value=min_value,
+        max_value=max_value,
+        no_input=no_input,
+        clamped=clamped,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -1141,13 +1006,13 @@ class DragInt(Widget):
         self.no_input = no_input
         self.clamped = clamped
 
-
 class DragIntx(Widget):
-    _command: Callable = core.add_drag_intx
+    _command: Callable = idpg.add_drag_intx
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -1163,7 +1028,7 @@ class DragIntx(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[int] = [0,0,0,0],
+        default_value: list[int] = [0, 0, 0, 0],
         size: int = 4,
         format: str = '%d',
         speed: float = 1.0,
@@ -1171,34 +1036,40 @@ class DragIntx(Widget):
         max_value: int = 100,
         no_input: bool = False,
         clamped: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            size=size,
-            format=format,
-            speed=speed,
-            min_value=min_value,
-            max_value=max_value,
-            no_input=no_input,
-            clamped=clamped,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        size=size,
+        format=format,
+        speed=speed,
+        min_value=min_value,
+        max_value=max_value,
+        no_input=no_input,
+        clamped=clamped,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -1223,9 +1094,8 @@ class DragIntx(Widget):
         self.no_input = no_input
         self.clamped = clamped
 
-
 class DragLine(Widget):
-    _command: Callable = core.add_drag_line
+    _command: Callable = idpg.add_drag_line
 
     def __init__(
         self,
@@ -1234,39 +1104,47 @@ class DragLine(Widget):
         before: int = 0,
         source: int = 0,
         callback: Callable = None,
+        user_data: Any = None,
         show: bool = True,
-        default_value: Any = [0.0,0.0,0.0,0.0],
-        color: list[int]=(0,0,0,-255),
+        default_value: Any = 0.0,
+        color: list[int] = [0, 0, 0, -255],
         thickness: float = 1.0,
         show_label: bool = True,
         vertical: bool = True,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            callback=callback,
-            show=show,
-            default_value=default_value,
-            thickness=thickness,
-            show_label=show_label,
-            vertical=vertical,
+        label=label,
+        parent=parent,
+        before=before,
+        source=source,
+        callback=callback,
+        user_data=user_data,
+        show=show,
+        default_value=default_value,
+        color=color,
+        thickness=thickness,
+        show_label=show_label,
+        vertical=vertical,
+        **kwargs
         )
+
+
         self.label = label
         self.parent = parent
         self.before = before
         self.source = source
         self.callback = callback
+        self.user_data = user_data
         self.show = show
         self.default_value = default_value
+        self.color = color
         self.thickness = thickness
         self.show_label = show_label
         self.vertical = vertical
 
-
 class DragPoint(Widget):
-    _command: Callable = core.add_drag_point
+    _command: Callable = idpg.add_drag_point
 
     def __init__(
         self,
@@ -1275,58 +1153,72 @@ class DragPoint(Widget):
         before: int = 0,
         source: int = 0,
         callback: Callable = None,
+        user_data: Any = None,
         show: bool = True,
-        default_value: Any = [0.0,0.0,0.0,0.0],
-        color: list[int]=(0,0,0,-255),
+        default_value: Any = (0.0, 0.0),
+        color: list[int] = [0, 0, 0, -255],
         thickness: float = 1.0,
         show_label: bool = True,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            callback=callback,
-            show=show,
-            default_value=default_value,
-            color=color,
-            thickness=thickness,
-            show_label=show_label,
+        label=label,
+        parent=parent,
+        before=before,
+        source=source,
+        callback=callback,
+        user_data=user_data,
+        show=show,
+        default_value=default_value,
+        color=color,
+        thickness=thickness,
+        show_label=show_label,
+        **kwargs
         )
+
+
         self.label = label
         self.parent = parent
         self.before = before
         self.source = source
         self.callback = callback
+        self.user_data = user_data
         self.show = show
         self.default_value = default_value
+        self.color = color
         self.thickness = thickness
         self.show_label = show_label
 
-
 class Dummy(Widget):
-    _command: Callable = core.add_dummy
+    _command: Callable = idpg.add_dummy
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
         show: bool = True,
         pos: list[int] = [],
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            show=show,
-            pos=pos,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        show=show,
+        pos=pos,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -1334,268 +1226,79 @@ class Dummy(Widget):
         self.show = show
         self.pos = pos
 
-
 class DynamicTexture(Widget):
-    _command: Callable = core.add_dynamic_texture
+    _command: Callable = idpg.add_dynamic_texture
 
     def __init__(
         self,
+        width: int,
         height: int,
         default_value: list[float],
         label: str = None,
-        parent: int = 0,
+        parent: int = 12,
+        **kwargs
     ):
         super().__init__(
-            height=height,
-            default_value=default_value,
-            label=label,
-            parent=parent,
+        width=width,
+        height=height,
+        default_value=default_value,
+        label=label,
+        parent=parent,
+        **kwargs
         )
+
+
+        self.width = width
         self.height = height
         self.default_value = default_value
         self.label = label
         self.parent = parent
 
-
-class ErrorSeries(Widget):
-    _command: Callable = core.add_error_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y: list[float],
-        negative: list[float],
-        positive: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        contribute_to_bounds: bool = True,
-        horizontal: bool = False,
-    ):
-        super().__init__(
-            x=x,
-            y=y,
-            negative=negative,
-            positive=positive,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            contribute_to_bounds=contribute_to_bounds,
-            horizontal=horizontal,
-        )
-        self.x = x
-        self.y = y
-        self.negative = negative
-        self.positive = positive
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.contribute_to_bounds = contribute_to_bounds
-        self.horizontal = horizontal
-
-
 class FileExtension(Widget):
-    _command: Callable = core.add_file_extension
+    _command: Callable = idpg.add_file_extension
 
     def __init__(
         self,
         extension: str,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         parent: int = 0,
         before: int = 0,
         custom_text: str = '',
-        color: list[float] = [-255,0,0,255],
+        color: list[float] = [-255, 0, 0, 255],
+        **kwargs
     ):
         super().__init__(
-            extension=extension,
-            label=label,
-            height=height,
-            parent=parent,
-            before=before,
-            custom_text=custom_text,
-            color=color,
+        extension=extension,
+        label=label,
+        width=width,
+        height=height,
+        parent=parent,
+        before=before,
+        custom_text=custom_text,
+        color=color,
+        **kwargs
         )
+
+
         self.extension = extension
         self.label = label
+        self.width = width
         self.height = height
         self.parent = parent
         self.before = before
         self.custom_text = custom_text
         self.color = color
 
-
-class Font(Widget):
-    _command: Callable = core.add_font
-
-    def __init__(
-        self,
-        file: str,
-        size: int,
-        label: str = None,
-        parent: int = 0,
-        default_font: bool = False,
-    ):
-        super().__init__(
-            file=file,
-            size=size,
-            label=label,
-            parent=parent,
-            default_font=default_font,
-        )
-        self.file = file
-        self.size = size
-        self.label = label
-        self.parent = parent
-        self.default_font = default_font
-
-
-class HeatSeries(Widget):
-    _command: Callable = core.add_heat_series
-
-    def __init__(
-        self,
-        x: list[float],
-        rows: int,
-        cols: int,
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        scale_min: float = 0.0,
-        scale_max: float = 1.0,
-        bounds_min: Any = [0.0,0.0],
-        bounds_max: Any = [1.0,1.0],
-        format: str = '%0.1f',
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            rows=rows,
-            cols=cols,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            scale_min=scale_min,
-            scale_max=scale_max,
-            bounds_min=bounds_min,
-            bounds_max=bounds_max,
-            format=format,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.rows = rows
-        self.cols = cols
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.scale_min = scale_min
-        self.scale_max = scale_max
-        self.bounds_min = bounds_min
-        self.format = format
-        self.contribute_to_bounds = contribute_to_bounds
-
-
-class HistogramSeries(Widget):
-    _command: Callable = core.add_histogram_series
-
-    def __init__(
-        self,
-        x: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        bins: int = -1,
-        bar_scale: float = 1.0,
-        min_range: float = 0.0,
-        max_range: float = 1.0,
-        cumlative: bool = False,
-        density: bool = False,
-        outliers: bool = True,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            bins=bins,
-            bar_scale=bar_scale,
-            min_range=min_range,
-            max_range=max_range,
-            cumlative=cumlative,
-            density=density,
-            outliers=outliers,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.bins = bins
-        self.bar_scale = bar_scale
-        self.min_range = min_range
-        self.max_range = max_range
-        self.cumlative = cumlative
-        self.density = density
-        self.outliers = outliers
-        self.contribute_to_bounds = contribute_to_bounds
-
-
-class HlineSeries(Widget):
-    _command: Callable = core.add_hline_series
-
-    def __init__(
-        self,
-        x: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.contribute_to_bounds = contribute_to_bounds
-
-
 class Image(Widget):
-    _command: Callable = core.add_image
+    _command: Callable = idpg.add_image
 
     def __init__(
         self,
+        texture_id: int,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -1609,32 +1312,40 @@ class Image(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        tint_color: list[float] = [255,255,255,255],
-        border_color: list[float] = [0,0,0,0],
-        uv_min: list[float] = [0.0,0.0],
-        uv_max: list[float] = [1.0,1.0],
+        tint_color: list[float] = [255, 255, 255, 255],
+        border_color: list[float] = [0, 0, 0, 0],
+        uv_min: list[float] = [0.0, 0.0],
+        uv_max: list[float] = [1.0, 1.0],
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            show=show,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            tint_color=tint_color,
-            border_color=border_color,
-            uv_max=uv_max,
-            uv_min=uv_min
+        texture_id=texture_id,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        tint_color=tint_color,
+        border_color=border_color,
+        uv_min=uv_min,
+        uv_max=uv_max,
+        **kwargs
         )
+
+
+        self.texture_id = texture_id
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -1649,14 +1360,18 @@ class Image(Widget):
         self.tracked = tracked
         self.track_offset = track_offset
         self.tint_color = tint_color
-
+        self.border_color = border_color
+        self.uv_min = uv_min
+        self.uv_max = uv_max
 
 class ImageButton(Widget):
-    _command: Callable = core.add_image_button
+    _command: Callable = idpg.add_image_button
 
     def __init__(
         self,
+        texture_id: int,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -1674,36 +1389,44 @@ class ImageButton(Widget):
         tracked: bool = False,
         track_offset: float = 0.5,
         frame_padding: int = -1,
-        tint_color: list[float] = [255,255,255,255],
-        background_color: list[float] = [0,0,0,0],
-        uv_min: list[float] = [0.0,0.0],
-        uv_max: list[float] = [1.0,1.0],
+        tint_color: list[float] = [255, 255, 255, 255],
+        background_color: list[float] = [0, 0, 0, 0],
+        uv_min: list[float] = [0.0, 0.0],
+        uv_max: list[float] = [1.0, 1.0],
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            frame_padding=frame_padding,
-            tint_color=tint_color,
-            background_color=background_color,
-            uv_min=uv_min,
-            uv_max=uv_max,
+        texture_id=texture_id,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        frame_padding=frame_padding,
+        tint_color=tint_color,
+        background_color=background_color,
+        uv_min=uv_min,
+        uv_max=uv_max,
+        **kwargs
         )
+
+
+        self.texture_id = texture_id
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -1722,55 +1445,17 @@ class ImageButton(Widget):
         self.track_offset = track_offset
         self.frame_padding = frame_padding
         self.tint_color = tint_color
-
-
-class ImageSeries(Widget):
-    _command: Callable = core.add_image_series
-
-    def __init__(
-        self,
-        bounds_min: list[float],
-        bounds_max: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        uv_min: list[float] = [0.0,0.0],
-        uv_max: list[float] = [1.0,1.0],
-        tint_color: list[int] = [255,255,255,255],
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            bounds_min=bounds_min,
-            bounds_max=bounds_max,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            uv_min=uv_min,
-            uv_max=uv_max,
-            tint_color=tint_color,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.bounds_min = bounds_min
-        self.bounds_max = bounds_max
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
+        self.background_color = background_color
         self.uv_min = uv_min
-        self.contribute_to_bounds = contribute_to_bounds
-
+        self.uv_max = uv_max
 
 class InputFloat(Widget):
-    _command: Callable = core.add_input_float
+    _command: Callable = idpg.add_input_float
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -1796,36 +1481,42 @@ class InputFloat(Widget):
         max_clamped: bool = False,
         on_enter: bool = False,
         readonly: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            format=format,
-            min_value=min_value,
-            max_value=max_value,
-            step=step,
-            step_fast=step_fast,
-            min_clamped=min_clamped,
-            max_clamped=max_clamped,
-            on_enter=on_enter,
-            readonly=readonly,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        format=format,
+        min_value=min_value,
+        max_value=max_value,
+        step=step,
+        step_fast=step_fast,
+        min_clamped=min_clamped,
+        max_clamped=max_clamped,
+        on_enter=on_enter,
+        readonly=readonly,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -1852,13 +1543,13 @@ class InputFloat(Widget):
         self.on_enter = on_enter
         self.readonly = readonly
 
-
 class InputFloatx(Widget):
-    _command: Callable = core.add_input_floatx
+    _command: Callable = idpg.add_input_floatx
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -1874,7 +1565,7 @@ class InputFloatx(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[float] = [0.0,0.0,0.0,0.0],
+        default_value: list[float] = [0.0, 0.0, 0.0, 0.0],
         format: str = '%.3f',
         min_value: float = 0.0,
         max_value: float = 100.0,
@@ -1883,35 +1574,41 @@ class InputFloatx(Widget):
         max_clamped: bool = False,
         on_enter: bool = False,
         readonly: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            format=format,
-            min_value=min_value,
-            max_value=max_value,
-            size=size,
-            min_clamped=min_clamped,
-            max_clamped=max_clamped,
-            on_enter=on_enter,
-            readonly=readonly,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        format=format,
+        min_value=min_value,
+        max_value=max_value,
+        size=size,
+        min_clamped=min_clamped,
+        max_clamped=max_clamped,
+        on_enter=on_enter,
+        readonly=readonly,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -1937,13 +1634,13 @@ class InputFloatx(Widget):
         self.on_enter = on_enter
         self.readonly = readonly
 
-
 class InputInt(Widget):
-    _command: Callable = core.add_input_int
+    _command: Callable = idpg.add_input_int
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -1959,7 +1656,7 @@ class InputInt(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[int] = [0,0,0,0],
+        default_value: list[int] = 0,
         min_value: int = 0,
         max_value: int = 100,
         step: int = 1,
@@ -1968,35 +1665,41 @@ class InputInt(Widget):
         max_clamped: bool = False,
         on_enter: bool = False,
         readonly: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            min_value=min_value,
-            max_value=max_value,
-            step=step,
-            step_fast=step_fast,
-            min_clamped=min_clamped,
-            max_clamped=max_clamped,
-            on_enter=on_enter,
-            readonly=readonly,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        min_value=min_value,
+        max_value=max_value,
+        step=step,
+        step_fast=step_fast,
+        min_clamped=min_clamped,
+        max_clamped=max_clamped,
+        on_enter=on_enter,
+        readonly=readonly,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -2022,13 +1725,13 @@ class InputInt(Widget):
         self.on_enter = on_enter
         self.readonly = readonly
 
-
 class InputIntx(Widget):
-    _command: Callable = core.add_input_intx
+    _command: Callable = idpg.add_input_intx
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -2044,7 +1747,7 @@ class InputIntx(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[int] = [0,0,0,0],
+        default_value: list[int] = [0, 0, 0, 0],
         min_value: int = 0,
         max_value: int = 100,
         size: int = 4,
@@ -2052,34 +1755,40 @@ class InputIntx(Widget):
         max_clamped: bool = False,
         on_enter: bool = False,
         readonly: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            min_value=min_value,
-            max_value=max_value,
-            size=size,
-            min_clamped=min_clamped,
-            max_clamped=max_clamped,
-            on_enter=on_enter,
-            readonly=readonly,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        min_value=min_value,
+        max_value=max_value,
+        size=size,
+        min_clamped=min_clamped,
+        max_clamped=max_clamped,
+        on_enter=on_enter,
+        readonly=readonly,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -2104,13 +1813,13 @@ class InputIntx(Widget):
         self.on_enter = on_enter
         self.readonly = readonly
 
-
 class InputText(Widget):
-    _command: Callable = core.add_input_text
+    _command: Callable = idpg.add_input_text
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -2139,39 +1848,45 @@ class InputText(Widget):
         password: bool = False,
         scientific: bool = False,
         on_enter: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            hint=hint,
-            multiline=multiline,
-            no_spaces=no_spaces,
-            uppercase=uppercase,
-            tab_input=tab_input,
-            decimal=decimal,
-            hexadecimal=hexadecimal,
-            readonly=readonly,
-            password=password,
-            scientific=scientific,
-            on_enter=on_enter,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        hint=hint,
+        multiline=multiline,
+        no_spaces=no_spaces,
+        uppercase=uppercase,
+        tab_input=tab_input,
+        decimal=decimal,
+        hexadecimal=hexadecimal,
+        readonly=readonly,
+        password=password,
+        scientific=scientific,
+        on_enter=on_enter,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -2201,13 +1916,13 @@ class InputText(Widget):
         self.scientific = scientific
         self.on_enter = on_enter
 
-
 class KnobFloat(Widget):
-    _command: Callable = core.add_knob_float
+    _command: Callable = idpg.add_knob_float
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -2226,29 +1941,35 @@ class KnobFloat(Widget):
         default_value: float = 0.0,
         min_value: float = 0.0,
         max_value: float = 100.0,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            min_value=min_value,
-            max_value=max_value,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        min_value=min_value,
+        max_value=max_value,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -2268,48 +1989,14 @@ class KnobFloat(Widget):
         self.min_value = min_value
         self.max_value = max_value
 
-
-class LineSeries(Widget):
-    _command: Callable = core.add_line_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.y = y
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.contribute_to_bounds = contribute_to_bounds
-
-
 class Listbox(Widget):
-    _command: Callable = core.add_listbox
+    _command: Callable = idpg.add_listbox
 
     def __init__(
         self,
         items: list[str] = [],
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -2327,30 +2014,36 @@ class Listbox(Widget):
         track_offset: float = 0.5,
         default_value: str = '',
         num_items: int = 3,
+        **kwargs
     ):
         super().__init__(
-            items=items,
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            num_items=num_items,
+        items=items,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        num_items=num_items,
+        **kwargs
         )
+
+
         self.items = items
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -2369,13 +2062,13 @@ class Listbox(Widget):
         self.default_value = default_value
         self.num_items = num_items
 
-
 class LoadingIndicator(Widget):
-    _command: Callable = core.add_loading_indicator
+    _command: Callable = idpg.add_loading_indicator
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -2383,18 +2076,36 @@ class LoadingIndicator(Widget):
         show: bool = True,
         pos: list[int] = [],
         style: int = 0,
+        circle_count: int = 8,
+        speed: float = 1.0,
+        radius: float = 3.0,
+        thickness: float = 1.0,
+        color: list[int] = [51, 51, 55, 255],
+        secondary_color: list[int] = [29, 151, 236, 103],
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            show=show,
-            pos=pos,
-            style=style,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        show=show,
+        pos=pos,
+        style=style,
+        circle_count=circle_count,
+        speed=speed,
+        radius=radius,
+        thickness=thickness,
+        color=color,
+        secondary_color=secondary_color,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -2402,66 +2113,84 @@ class LoadingIndicator(Widget):
         self.show = show
         self.pos = pos
         self.style = style
+        self.circle_count = circle_count
+        self.speed = speed
+        self.radius = radius
+        self.thickness = thickness
+        self.color = color
+        self.secondary_color = secondary_color
 
-
-class PieSeries(Widget):
-    _command: Callable = core.add_pie_series
+class MenuItem(Widget):
+    _command: Callable = idpg.add_menu_item
 
     def __init__(
         self,
-        x: float,
-        y: float,
-        radius: float,
-        values: list[float],
-        labels: list[str],
         label: str = None,
+        indent: int = -1,
         parent: int = 0,
         before: int = 0,
-        source: int = 0,
+        payload_type: str = '$$DPG_PAYLOAD',
+        callback: Callable = None,
+        drag_callback: Callable = None,
+        drop_callback: Callable = None,
+        user_data: Any = None,
         show: bool = True,
-        format: str = '%0.2f',
-        angle: float = 90.0,
-        normalize: bool = False,
-        contribute_to_bounds: bool = True,
+        enabled: bool = True,
+        filter_key: str = '',
+        tracked: bool = False,
+        track_offset: float = 0.5,
+        default_value: bool = False,
+        shortcut: str = '',
+        check: bool = False,
+        **kwargs
     ):
         super().__init__(
-            x=x,
-            y=y,
-            radius=radius,
-            values=values,
-            labels=labels,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            format=format,
-            angle=angle,
-            normalize=normalize,
-            contribute_to_bounds=contribute_to_bounds,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        shortcut=shortcut,
+        check=check,
+        **kwargs
         )
-        self.x = x
-        self.y = y
-        self.radius = radius
-        self.values = values
-        self.labels = labels
+
+
         self.label = label
+        self.indent = indent
         self.parent = parent
         self.before = before
-        self.source = source
+        self.payload_type = payload_type
+        self.callback = callback
+        self.drag_callback = drag_callback
+        self.drop_callback = drop_callback
+        self.user_data = user_data
         self.show = show
-        self.format = format
-        self.angle = angle
-        self.normalize = normalize
-        self.contribute_to_bounds = contribute_to_bounds
-
+        self.enabled = enabled
+        self.filter_key = filter_key
+        self.tracked = tracked
+        self.track_offset = track_offset
+        self.default_value = default_value
+        self.shortcut = shortcut
+        self.check = check
 
 class ProgressBar(Widget):
-    _command: Callable = core.add_progress_bar
+    _command: Callable = idpg.add_progress_bar
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -2477,26 +2206,32 @@ class ProgressBar(Widget):
         track_offset: float = 0.5,
         overlay: str = '',
         default_value: float = 0.0,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            show=show,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            overlay=overlay,
-            default_value=default_value,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        overlay=overlay,
+        default_value=default_value,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -2513,13 +2248,12 @@ class ProgressBar(Widget):
         self.overlay = overlay
         self.default_value = default_value
 
-
 class RadioButton(Widget):
-    _command: Callable = core.add_radio_button
+    _command: Callable = idpg.add_radio_button
 
     def __init__(
         self,
-        items: int = [],
+        items: int = (),
         label: str = None,
         indent: int = -1,
         parent: int = 0,
@@ -2538,28 +2272,32 @@ class RadioButton(Widget):
         track_offset: float = 0.5,
         default_value: str = '',
         horizontal: bool = False,
+        **kwargs
     ):
         super().__init__(
-            items=items,
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            horizontal=horizontal,
+        items=items,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        horizontal=horizontal,
+        **kwargs
         )
+
+
         self.items = items
         self.label = label
         self.indent = indent
@@ -2580,9 +2318,39 @@ class RadioButton(Widget):
         self.default_value = default_value
         self.horizontal = horizontal
 
+class RawTexture(Widget):
+    _command: Callable = idpg.add_raw_texture
+
+    def __init__(
+        self,
+        width: int,
+        height: int,
+        default_value: list[float],
+        label: str = None,
+        format: int = 0,
+        parent: int = 12,
+        **kwargs
+    ):
+        super().__init__(
+        width=width,
+        height=height,
+        default_value=default_value,
+        label=label,
+        format=format,
+        parent=parent,
+        **kwargs
+        )
+
+
+        self.width = width
+        self.height = height
+        self.default_value = default_value
+        self.label = label
+        self.format = format
+        self.parent = parent
 
 class SameLine(Widget):
-    _command: Callable = core.add_same_line
+    _command: Callable = idpg.add_same_line
 
     def __init__(
         self,
@@ -2592,15 +2360,19 @@ class SameLine(Widget):
         show: bool = True,
         xoffset: float = 0.0,
         spacing: float = -1.0,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            parent=parent,
-            before=before,
-            show=show,
-            xoffset=xoffset,
-            spacing=spacing,
+        label=label,
+        parent=parent,
+        before=before,
+        show=show,
+        xoffset=xoffset,
+        spacing=spacing,
+        **kwargs
         )
+
+
         self.label = label
         self.parent = parent
         self.before = before
@@ -2608,47 +2380,13 @@ class SameLine(Widget):
         self.xoffset = xoffset
         self.spacing = spacing
 
-
-class ScatterSeries(Widget):
-    _command: Callable = core.add_scatter_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.y = y
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.contribute_to_bounds = contribute_to_bounds
-
-
 class Selectable(Widget):
-    _command: Callable = core.add_selectable
+    _command: Callable = idpg.add_selectable
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -2667,29 +2405,35 @@ class Selectable(Widget):
         track_offset: float = 0.5,
         default_value: bool = False,
         span_columns: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            span_columns=span_columns,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        span_columns=span_columns,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -2709,9 +2453,8 @@ class Selectable(Widget):
         self.default_value = default_value
         self.span_columns = span_columns
 
-
 class Separator(Widget):
-    _command: Callable = core.add_separator
+    _command: Callable = idpg.add_separator
 
     def __init__(
         self,
@@ -2721,15 +2464,19 @@ class Separator(Widget):
         before: int = 0,
         show: bool = True,
         pos: list[int] = [],
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            show=show,
-            pos=pos,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        show=show,
+        pos=pos,
+        **kwargs
         )
+
+
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -2737,117 +2484,13 @@ class Separator(Widget):
         self.show = show
         self.pos = pos
 
-
-class ShadeSeries(Widget):
-    _command: Callable = core.add_shade_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y1: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        y2: Any = [],
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            y1=y1,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            y2=y2,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.y1 = y1
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.y2 = y2
-        self.contribute_to_bounds = contribute_to_bounds
-
-
-class SimplePlot(Widget):
-    _command: Callable = core.add_simple_plot
-
-    def __init__(
-        self,
-        label: str = None,
-        height: int = 0,
-        indent: int = -1,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        payload_type: str = '$$DPG_PAYLOAD',
-        drag_callback: Callable = None,
-        drop_callback: Callable = None,
-        show: bool = True,
-        filter_key: str = '',
-        tracked: bool = False,
-        track_offset: float = 0.5,
-        default_value: list[float] = [],
-        overlay: str = '',
-        histogram: bool = False,
-        autosize: bool = True,
-        min_scale: float = 0.0,
-        max_scale: float = 0.0,
-    ):
-        super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            show=show,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            overlay=overlay,
-            histogram=histogram,
-            autosize=autosize,
-            min_scale=min_scale,
-            max_scale=max_scale,
-        )
-        self.label = label
-        self.height = height
-        self.indent = indent
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.payload_type = payload_type
-        self.drag_callback = drag_callback
-        self.drop_callback = drop_callback
-        self.show = show
-        self.filter_key = filter_key
-        self.tracked = tracked
-        self.track_offset = track_offset
-        self.default_value = default_value
-        self.overlay = overlay
-        self.histogram = histogram
-        self.autosize = autosize
-        self.min_scale = min_scale
-        self.max_scale = max_scale
-
-
 class SliderFloat(Widget):
-    _command: Callable = core.add_slider_float
+    _command: Callable = idpg.add_slider_float
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -2871,34 +2514,40 @@ class SliderFloat(Widget):
         min_value: float = 0.0,
         max_value: float = 100.0,
         format: str = '%.3f',
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            vertical=vertical,
-            no_input=no_input,
-            clamped=clamped,
-            min_value=min_value,
-            max_value=max_value,
-            format=format,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        vertical=vertical,
+        no_input=no_input,
+        clamped=clamped,
+        min_value=min_value,
+        max_value=max_value,
+        format=format,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -2923,13 +2572,13 @@ class SliderFloat(Widget):
         self.max_value = max_value
         self.format = format
 
-
 class SliderFloatx(Widget):
-    _command: Callable = core.add_slider_floatx
+    _command: Callable = idpg.add_slider_floatx
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -2945,40 +2594,46 @@ class SliderFloatx(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[float] = [0.0,0.0,0.0,0.0],
+        default_value: list[float] = [0.0, 0.0, 0.0, 0.0],
         size: int = 4,
         no_input: bool = False,
         clamped: bool = False,
         min_value: float = 0.0,
         max_value: float = 100.0,
         format: str = '%.3f',
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            size=size,
-            no_input=no_input,
-            clamped=clamped,
-            min_value=min_value,
-            max_value=max_value,
-            format=format,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        size=size,
+        no_input=no_input,
+        clamped=clamped,
+        min_value=min_value,
+        max_value=max_value,
+        format=format,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -3002,13 +2657,13 @@ class SliderFloatx(Widget):
         self.max_value = max_value
         self.format = format
 
-
 class SliderInt(Widget):
-    _command: Callable = core.add_slider_int
+    _command: Callable = idpg.add_slider_int
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         height: int = 0,
         indent: int = -1,
         parent: int = 0,
@@ -3032,34 +2687,40 @@ class SliderInt(Widget):
         min_value: int = 0,
         max_value: int = 100,
         format: str = '%d',
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            height=height,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            vertical=vertical,
-            no_input=no_input,
-            clamped=clamped,
-            min_value=min_value,
-            max_value=max_value,
-            format=format,
+        label=label,
+        width=width,
+        height=height,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        vertical=vertical,
+        no_input=no_input,
+        clamped=clamped,
+        min_value=min_value,
+        max_value=max_value,
+        format=format,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.height = height
         self.indent = indent
         self.parent = parent
@@ -3084,13 +2745,13 @@ class SliderInt(Widget):
         self.max_value = max_value
         self.format = format
 
-
 class SliderIntx(Widget):
-    _command: Callable = core.add_slider_intx
+    _command: Callable = idpg.add_slider_intx
 
     def __init__(
         self,
         label: str = None,
+        width: int = 0,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
@@ -3106,40 +2767,46 @@ class SliderIntx(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: list[int] = [0,0,0,0],
+        default_value: list[int] = [0, 0, 0, 0],
         size: int = 4,
         no_input: bool = False,
         clamped: bool = False,
         min_value: int = 0,
         max_value: int = 100,
         format: str = '%d',
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            enabled=enabled,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            size=size,
-            no_input=no_input,
-            clamped=clamped,
-            min_value=min_value,
-            max_value=max_value,
-            format=format,
+        label=label,
+        width=width,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        enabled=enabled,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        size=size,
+        no_input=no_input,
+        clamped=clamped,
+        min_value=min_value,
+        max_value=max_value,
+        format=format,
+        **kwargs
         )
+
+
         self.label = label
+        self.width = width
         self.indent = indent
         self.parent = parent
         self.before = before
@@ -3163,9 +2830,8 @@ class SliderIntx(Widget):
         self.max_value = max_value
         self.format = format
 
-
 class Spacing(Widget):
-    _command: Callable = core.add_spacing
+    _command: Callable = idpg.add_spacing
 
     def __init__(
         self,
@@ -3176,16 +2842,20 @@ class Spacing(Widget):
         show: bool = True,
         pos: list[int] = [],
         count: int = 1,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            show=show,
-            pos=pos,
-            count=count,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        show=show,
+        pos=pos,
+        count=count,
+        **kwargs
         )
+
+
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -3194,105 +2864,204 @@ class Spacing(Widget):
         self.pos = pos
         self.count = count
 
-
-class StairSeries(Widget):
-    _command: Callable = core.add_stair_series
-
-    def __init__(
-        self,
-        x: list[float],
-        y: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.y = y
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.contribute_to_bounds = contribute_to_bounds
-
-
 class StaticTexture(Widget):
-    _command: Callable = core.add_static_texture
+    _command: Callable = idpg.add_static_texture
 
     def __init__(
         self,
+        width: int,
         height: int,
         default_value: list[float],
         label: str = None,
-        parent: int = 0,
-        file: str = '',
+        parent: int = 12,
+        **kwargs
     ):
         super().__init__(
-            height=height,
-            default_value=default_value,
-            label=label,
-            parent=parent,
-            file=file,
+        width=width,
+        height=height,
+        default_value=default_value,
+        label=label,
+        parent=parent,
+        **kwargs
         )
+
+
+        self.width = width
         self.height = height
         self.default_value = default_value
         self.label = label
         self.parent = parent
-        self.file = file
 
-
-class StemSeries(Widget):
-    _command: Callable = core.add_stem_series
+class TabButton(Widget):
+    _command: Callable = idpg.add_tab_button
 
     def __init__(
         self,
-        x: list[float],
-        y: list[float],
         label: str = None,
         indent: int = -1,
         parent: int = 0,
         before: int = 0,
-        source: int = 0,
+        payload_type: str = '$$DPG_PAYLOAD',
+        callback: Callable = None,
+        drag_callback: Callable = None,
+        drop_callback: Callable = None,
+        user_data: Any = None,
         show: bool = True,
-        contribute_to_bounds: bool = True,
+        filter_key: str = '',
+        tracked: bool = False,
+        track_offset: float = 0.5,
+        no_reorder: bool = False,
+        leading: bool = False,
+        trailing: bool = False,
+        no_tooltip: bool = False,
+        **kwargs
     ):
         super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            contribute_to_bounds=contribute_to_bounds,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        no_reorder=no_reorder,
+        leading=leading,
+        trailing=trailing,
+        no_tooltip=no_tooltip,
+        **kwargs
         )
-        self.x = x
-        self.y = y
+
+
         self.label = label
         self.indent = indent
         self.parent = parent
         self.before = before
-        self.source = source
+        self.payload_type = payload_type
+        self.callback = callback
+        self.drag_callback = drag_callback
+        self.drop_callback = drop_callback
+        self.user_data = user_data
         self.show = show
-        self.contribute_to_bounds = contribute_to_bounds
+        self.filter_key = filter_key
+        self.tracked = tracked
+        self.track_offset = track_offset
+        self.no_reorder = no_reorder
+        self.leading = leading
+        self.trailing = trailing
+        self.no_tooltip = no_tooltip
 
+class TableColumn(Widget):
+    _command: Callable = idpg.add_table_column
+
+    def __init__(
+        self,
+        label: str = None,
+        width: int = 0,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        init_width_or_weight: bool = 0.0,
+        default_hide: bool = False,
+        default_sort: bool = False,
+        width_stretch: bool = False,
+        width_fixed: bool = False,
+        no_resize: bool = False,
+        no_reorder: bool = False,
+        no_hide: bool = False,
+        no_clip: bool = False,
+        no_sort: bool = False,
+        no_sort_ascending: bool = False,
+        no_sort_descending: bool = False,
+        no_header_width: bool = False,
+        prefer_sort_ascending: bool = True,
+        prefer_sort_descending: bool = False,
+        indent_enable: bool = False,
+        indent_disable: bool = False,
+        **kwargs
+    ):
+        super().__init__(
+        label=label,
+        width=width,
+        parent=parent,
+        before=before,
+        show=show,
+        init_width_or_weight=init_width_or_weight,
+        default_hide=default_hide,
+        default_sort=default_sort,
+        width_stretch=width_stretch,
+        width_fixed=width_fixed,
+        no_resize=no_resize,
+        no_reorder=no_reorder,
+        no_hide=no_hide,
+        no_clip=no_clip,
+        no_sort=no_sort,
+        no_sort_ascending=no_sort_ascending,
+        no_sort_descending=no_sort_descending,
+        no_header_width=no_header_width,
+        prefer_sort_ascending=prefer_sort_ascending,
+        prefer_sort_descending=prefer_sort_descending,
+        indent_enable=indent_enable,
+        indent_disable=indent_disable,
+        **kwargs
+        )
+
+
+        self.label = label
+        self.width = width
+        self.parent = parent
+        self.before = before
+        self.show = show
+        self.init_width_or_weight = init_width_or_weight
+        self.default_hide = default_hide
+        self.default_sort = default_sort
+        self.width_stretch = width_stretch
+        self.width_fixed = width_fixed
+        self.no_resize = no_resize
+        self.no_reorder = no_reorder
+        self.no_hide = no_hide
+        self.no_clip = no_clip
+        self.no_sort = no_sort
+        self.no_sort_ascending = no_sort_ascending
+        self.no_sort_descending = no_sort_descending
+        self.no_header_width = no_header_width
+        self.prefer_sort_ascending = prefer_sort_ascending
+        self.prefer_sort_descending = prefer_sort_descending
+        self.indent_enable = indent_enable
+        self.indent_disable = indent_disable
+
+class TableNextColumn(Widget):
+    _command: Callable = idpg.add_table_next_column
+
+    def __init__(
+        self,
+        label: str = None,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        **kwargs
+    ):
+        super().__init__(
+        label=label,
+        parent=parent,
+        before=before,
+        show=show,
+        **kwargs
+        )
+
+
+        self.label = label
+        self.parent = parent
+        self.before = before
+        self.show = show
 
 class Text(Widget):
-    _command: Callable = core.add_text
+    _command: Callable = idpg.add_text
 
     def __init__(
         self,
@@ -3309,26 +3078,30 @@ class Text(Widget):
         track_offset: float = 0.5,
         wrap: int = -1,
         bullet: bool = False,
-        color: list[float] = [-1,-1,-1,-1],
+        color: list[float] = [-1, -1, -1, -1],
         show_label: bool = False,
+        **kwargs
     ):
         super().__init__(
-            default_value=default_value,
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            wrap=wrap,
-            bullet=bullet,
-            color=color,
-            show_label=show_label,
+        default_value=default_value,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        source=source,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        wrap=wrap,
+        bullet=bullet,
+        color=color,
+        show_label=show_label,
+        **kwargs
         )
+
+
         self.default_value = default_value
         self.label = label
         self.indent = indent
@@ -3345,9 +3118,8 @@ class Text(Widget):
         self.color = color
         self.show_label = show_label
 
-
 class TextPoint(Widget):
-    _command: Callable = core.add_text_point
+    _command: Callable = idpg.add_text_point
 
     def __init__(
         self,
@@ -3358,24 +3130,28 @@ class TextPoint(Widget):
         before: int = 0,
         source: int = 0,
         show: bool = True,
-        x_offset: int = ...,
-        y_offset: int = ...,
+        x_offset: int = Ellipsis,
+        y_offset: int = Ellipsis,
         contribute_to_bounds: bool = True,
         vertical: bool = False,
+        **kwargs
     ):
         super().__init__(
-            x=x,
-            y=y,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            x_offset=x_offset,
-            y_offset=y_offset,
-            contribute_to_bounds=contribute_to_bounds,
-            vertical=vertical,
+        x=x,
+        y=y,
+        label=label,
+        parent=parent,
+        before=before,
+        source=source,
+        show=show,
+        x_offset=x_offset,
+        y_offset=y_offset,
+        contribute_to_bounds=contribute_to_bounds,
+        vertical=vertical,
+        **kwargs
         )
+
+
         self.x = x
         self.y = y
         self.label = label
@@ -3388,9 +3164,8 @@ class TextPoint(Widget):
         self.contribute_to_bounds = contribute_to_bounds
         self.vertical = vertical
 
-
 class TimePicker(Widget):
-    _command: Callable = core.add_time_picker
+    _command: Callable = idpg.add_time_picker
 
     def __init__(
         self,
@@ -3408,27 +3183,31 @@ class TimePicker(Widget):
         filter_key: str = '',
         tracked: bool = False,
         track_offset: float = 0.5,
-        default_value: dict = {'hour':14,'min':32,'sec':23},
+        default_value: dict = {'hour': 14, 'min': 32, 'sec': 23},
         hour24: bool = False,
+        **kwargs
     ):
         super().__init__(
-            label=label,
-            indent=indent,
-            parent=parent,
-            before=before,
-            payload_type=payload_type,
-            callback=callback,
-            drag_callback=drag_callback,
-            drop_callback=drop_callback,
-            user_data=user_data,
-            show=show,
-            pos=pos,
-            filter_key=filter_key,
-            tracked=tracked,
-            track_offset=track_offset,
-            default_value=default_value,
-            hour24=hour24,
+        label=label,
+        indent=indent,
+        parent=parent,
+        before=before,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        tracked=tracked,
+        track_offset=track_offset,
+        default_value=default_value,
+        hour24=hour24,
+        **kwargs
         )
+
+
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -3446,33 +3225,3 @@ class TimePicker(Widget):
         self.default_value = default_value
         self.hour24 = hour24
 
-
-class VlineSeries(Widget):
-    _command: Callable = core.add_vline_series
-
-    def __init__(
-        self,
-        x: list[float],
-        label: str = None,
-        parent: int = 0,
-        before: int = 0,
-        source: int = 0,
-        show: bool = True,
-        contribute_to_bounds: bool = True,
-    ):
-        super().__init__(
-            x=x,
-            label=label,
-            parent=parent,
-            before=before,
-            source=source,
-            show=show,
-            contribute_to_bounds=contribute_to_bounds,
-        )
-        self.x = x
-        self.label = label
-        self.parent = parent
-        self.before = before
-        self.source = source
-        self.show = show
-        self.contribute_to_bounds = contribute_to_bounds
