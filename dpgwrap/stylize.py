@@ -1,6 +1,6 @@
 from typing import Callable, Any
-from dearpygui import core as idpg
 
+from . import idpg
 from ._item import Item, Context
 
 
