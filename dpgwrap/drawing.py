@@ -1,7 +1,7 @@
 from typing import Callable, Any
 
 from . import idpg
-from ._item import Item
+from ._widget import Container, Widget
 
 
 ##################################################
@@ -9,265 +9,637 @@ from ._item import Item
 ##################################################
 
 
-class BoolValue(Item):
-    _command: Callable = idpg.add_bool_value
+class ViewportDrawlist(Container):
+    _command: Callable = idpg.add_viewport_drawlist
 
     def __init__(
         self,
         label: str = None,
-        source: int = 0,
-        default_value: bool = False,
-        parent: int = 13,
+        show: bool = True,
+        filter_key: str = '',
+        delay_search: str = False,
+        front: bool = True,
         **kwargs
     ):
         super().__init__(
         label=label,
-        source=source,
-        default_value=default_value,
-        parent=parent,
+        show=show,
+        filter_key=filter_key,
+        delay_search=delay_search,
+        front=front,
         **kwargs
         )
         self.label = label
-        self.source = source
-        self.default_value = default_value
-        self.parent = parent
+        self.show = show
+        self.filter_key = filter_key
+        self.delay_search = delay_search
+        self.front = front
 
 
-class ColorValue(Item):
-    _command: Callable = idpg.add_color_value
+class Drawlist(Container):
+    _command: Callable = idpg.add_drawlist
 
     def __init__(
         self,
         label: str = None,
-        source: int = 0,
-        default_value: list[float] = [0.0, 0.0, 0.0, 0.0],
-        parent: int = 13,
+        width: int = 0,
+        height: int = 0,
+        parent: int = 0,
+        before: int = 0,
+        payload_type: str = '$$DPG_PAYLOAD',
+        callback: Callable = None,
+        drag_callback: Callable = None,
+        drop_callback: Callable = None,
+        user_data: Any = None,
+        show: bool = True,
+        pos: list[int] = [],
+        filter_key: str = '',
+        delay_search: str = False,
+        tracked: bool = False,
+        track_offset: float = 0.5,
         **kwargs
     ):
         super().__init__(
         label=label,
-        source=source,
-        default_value=default_value,
+        width=width,
+        height=height,
         parent=parent,
+        before=before,
+        payload_type=payload_type,
+        callback=callback,
+        drag_callback=drag_callback,
+        drop_callback=drop_callback,
+        user_data=user_data,
+        show=show,
+        pos=pos,
+        filter_key=filter_key,
+        delay_search=delay_search,
+        tracked=tracked,
+        track_offset=track_offset,
         **kwargs
         )
         self.label = label
-        self.source = source
-        self.default_value = default_value
+        self.width = width
+        self.height = height
         self.parent = parent
+        self.before = before
+        self.payload_type = payload_type
+        self.callback = callback
+        self.drag_callback = drag_callback
+        self.drop_callback = drop_callback
+        self.user_data = user_data
+        self.show = show
+        self.pos = pos
+        self.filter_key = filter_key
+        self.delay_search = delay_search
+        self.tracked = tracked
+        self.track_offset = track_offset
 
 
-class Double4Value(Item):
-    _command: Callable = idpg.add_double4_value
+class DrawLayer(Container):
+    _command: Callable = idpg.add_draw_layer
 
     def __init__(
         self,
         label: str = None,
-        source: int = 0,
-        default_value: Any = (0.0, 0.0, 0.0, 0.0),
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
         **kwargs
     ):
         super().__init__(
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
         **kwargs
         )
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
 
 
-class DoubleValue(Item):
-    _command: Callable = idpg.add_double_value
+class Arrow(Widget):
+    _command: Callable = idpg.draw_arrow
 
     def __init__(
         self,
+        p1: list[float],
+        p2: list[float],
         label: str = None,
-        source: int = 0,
-        default_value: float = 0.0,
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        thickness: float = 1.0,
+        size: int = 4,
         **kwargs
     ):
         super().__init__(
+        p1=p1,
+        p2=p2,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        thickness=thickness,
+        size=size,
         **kwargs
         )
+        self.p1 = p1
+        self.p2 = p2
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.thickness = thickness
+        self.size = size
 
 
-class Float4Value(Item):
-    _command: Callable = idpg.add_float4_value
+class BezierCubic(Widget):
+    _command: Callable = idpg.draw_bezier_cubic
 
     def __init__(
         self,
+        p1: list[float],
+        p2: list[float],
+        p3: list[float],
+        p4: list[float],
         label: str = None,
-        source: int = 0,
-        default_value: list[float] = [0.0, 0.0, 0.0, 0.0],
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        thickness: float = 1.0,
+        segments: int = 0,
         **kwargs
     ):
         super().__init__(
+        p1=p1,
+        p2=p2,
+        p3=p3,
+        p4=p4,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        thickness=thickness,
+        segments=segments,
         **kwargs
         )
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
+        self.p4 = p4
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.thickness = thickness
+        self.segments = segments
 
 
-class FloatValue(Item):
-    _command: Callable = idpg.add_float_value
+class BezierQuadratic(Widget):
+    _command: Callable = idpg.draw_bezier_quadratic
 
     def __init__(
         self,
+        p1: list[float],
+        p2: list[float],
+        p3: list[float],
         label: str = None,
-        source: int = 0,
-        default_value: float = 0.0,
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        thickness: float = 1.0,
+        segments: int = 0,
         **kwargs
     ):
         super().__init__(
+        p1=p1,
+        p2=p2,
+        p3=p3,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        thickness=thickness,
+        segments=segments,
         **kwargs
         )
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.thickness = thickness
+        self.segments = segments
 
 
-class FloatVectValue(Item):
-    _command: Callable = idpg.add_float_vect_value
+class Circle(Widget):
+    _command: Callable = idpg.draw_circle
 
     def __init__(
         self,
+        center: list[float],
+        radius: float,
         label: str = None,
-        source: int = 0,
-        default_value: list[float] = [],
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        fill: list[int] = [0, 0, 0, -255],
+        thickness: float = 1.0,
+        segments: int = 0,
         **kwargs
     ):
         super().__init__(
+        center=center,
+        radius=radius,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        fill=fill,
+        thickness=thickness,
+        segments=segments,
         **kwargs
         )
+        self.center = center
+        self.radius = radius
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.fill = fill
+        self.thickness = thickness
+        self.segments = segments
 
 
-class Int4Value(Item):
-    _command: Callable = idpg.add_int4_value
+class Ellipse(Widget):
+    _command: Callable = idpg.draw_ellipse
 
     def __init__(
         self,
+        pmin: list[float],
+        pmax: list[float],
         label: str = None,
-        source: int = 0,
-        default_value: list[int] = [0, 0, 0, 0],
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        fill: list[int] = [0, 0, 0, -255],
+        thickness: float = 1.0,
+        segments: int = 32,
         **kwargs
     ):
         super().__init__(
+        pmin=pmin,
+        pmax=pmax,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        fill=fill,
+        thickness=thickness,
+        segments=segments,
         **kwargs
         )
+        self.pmin = pmin
+        self.pmax = pmax
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.fill = fill
+        self.thickness = thickness
+        self.segments = segments
 
 
-class IntValue(Item):
-    _command: Callable = idpg.add_int_value
+class Image(Widget):
+    _command: Callable = idpg.draw_image
 
     def __init__(
         self,
+        texture_id: int,
+        pmin: list[float],
+        pmax: list[float],
         label: str = None,
-        source: int = 0,
-        default_value: int = 0,
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        uv_min: list[float] = [0.0, 0.0],
+        uv_max: list[float] = [1.0, 1.0],
+        color: list[int] = [255, 255, 255, 255],
         **kwargs
     ):
         super().__init__(
+        texture_id=texture_id,
+        pmin=pmin,
+        pmax=pmax,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        uv_min=uv_min,
+        uv_max=uv_max,
+        color=color,
         **kwargs
         )
+        self.texture_id = texture_id
+        self.pmin = pmin
+        self.pmax = pmax
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.uv_min = uv_min
+        self.uv_max = uv_max
+        self.color = color
 
 
-class SeriesValue(Item):
-    _command: Callable = idpg.add_series_value
+class Line(Widget):
+    _command: Callable = idpg.draw_line
 
     def __init__(
         self,
+        p1: list[float],
+        p2: list[float],
         label: str = None,
-        source: int = 0,
-        default_value: Any = (),
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        thickness: float = 1.0,
         **kwargs
     ):
         super().__init__(
+        p1=p1,
+        p2=p2,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        thickness=thickness,
         **kwargs
         )
+        self.p1 = p1
+        self.p2 = p2
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.thickness = thickness
 
 
-class StringValue(Item):
-    _command: Callable = idpg.add_string_value
+class Polygon(Widget):
+    _command: Callable = idpg.draw_polygon
 
     def __init__(
         self,
+        points: list[list[float]],
         label: str = None,
-        source: int = 0,
-        default_value: str = '',
-        parent: int = 13,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        fill: list[int] = [0, 0, 0, -255],
+        thickness: float = 1.0,
         **kwargs
     ):
         super().__init__(
+        points=points,
         label=label,
-        source=source,
-        default_value=default_value,
         parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        fill=fill,
+        thickness=thickness,
         **kwargs
         )
+        self.points = points
         self.label = label
-        self.source = source
-        self.default_value = default_value
         self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.fill = fill
+        self.thickness = thickness
+
+
+class Polyline(Widget):
+    _command: Callable = idpg.draw_polyline
+
+    def __init__(
+        self,
+        points: list[list[float]],
+        label: str = None,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        closed: bool = False,
+        color: list[int] = [255, 255, 255, 255],
+        thickness: float = 1.0,
+        **kwargs
+    ):
+        super().__init__(
+        points=points,
+        label=label,
+        parent=parent,
+        before=before,
+        show=show,
+        closed=closed,
+        color=color,
+        thickness=thickness,
+        **kwargs
+        )
+        self.points = points
+        self.label = label
+        self.parent = parent
+        self.before = before
+        self.show = show
+        self.closed = closed
+        self.color = color
+        self.thickness = thickness
+
+
+class Quad(Widget):
+    _command: Callable = idpg.draw_quad
+
+    def __init__(
+        self,
+        p1: list[float],
+        p2: list[float],
+        p3: list[float],
+        p4: list[float],
+        label: str = None,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        fill: list[int] = [0, 0, 0, -255],
+        thickness: float = 1.0,
+        **kwargs
+    ):
+        super().__init__(
+        p1=p1,
+        p2=p2,
+        p3=p3,
+        p4=p4,
+        label=label,
+        parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        fill=fill,
+        thickness=thickness,
+        **kwargs
+        )
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
+        self.p4 = p4
+        self.label = label
+        self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.fill = fill
+        self.thickness = thickness
+
+
+class Rectangle(Widget):
+    _command: Callable = idpg.draw_rectangle
+
+    def __init__(
+        self,
+        pmin: list[float],
+        pmax: list[float],
+        label: str = None,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        fill: list[int] = [0, 0, 0, -255],
+        rounding: float = 0.0,
+        thickness: float = 1.0,
+        **kwargs
+    ):
+        super().__init__(
+        pmin=pmin,
+        pmax=pmax,
+        label=label,
+        parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        fill=fill,
+        rounding=rounding,
+        thickness=thickness,
+        **kwargs
+        )
+        self.pmin = pmin
+        self.pmax = pmax
+        self.label = label
+        self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.fill = fill
+        self.rounding = rounding
+        self.thickness = thickness
+
+
+class Text(Widget):
+    _command: Callable = idpg.draw_text
+
+    def __init__(
+        self,
+        pos: list[float],
+        text: str,
+        label: str = None,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        size: int = 10,
+        **kwargs
+    ):
+        super().__init__(
+        pos=pos,
+        text=text,
+        label=label,
+        parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        size=size,
+        **kwargs
+        )
+        self.pos = pos
+        self.text = text
+        self.label = label
+        self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.size = size
+
+
+class Triangle(Widget):
+    _command: Callable = idpg.draw_triangle
+
+    def __init__(
+        self,
+        p1: list[float],
+        p2: list[float],
+        p3: list[float],
+        label: str = None,
+        parent: int = 0,
+        before: int = 0,
+        show: bool = True,
+        color: list[int] = [255, 255, 255, 255],
+        fill: list[int] = [0, 0, 0, -255],
+        thickness: float = 1.0,
+        **kwargs
+    ):
+        super().__init__(
+        p1=p1,
+        p2=p2,
+        p3=p3,
+        label=label,
+        parent=parent,
+        before=before,
+        show=show,
+        color=color,
+        fill=fill,
+        thickness=thickness,
+        **kwargs
+        )
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
+        self.label = label
+        self.parent = parent
+        self.before = before
+        self.show = show
+        self.color = color
+        self.fill = fill
+        self.thickness = thickness
