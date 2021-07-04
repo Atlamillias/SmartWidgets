@@ -14,11 +14,10 @@ class FontChars(Item):
 
     def __init__(self, chars: list[int], label: str = None, parent: int = 0, **kwargs):
         super().__init__(chars=chars, label=label, parent=parent, **kwargs)
-
-
         self.chars = chars
         self.label = label
         self.parent = parent
+
 
 class FontRange(Item):
     _command: Callable = idpg.add_font_range
@@ -38,23 +37,21 @@ class FontRange(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.first_char = first_char
         self.last_char = last_char
         self.label = label
         self.parent = parent
+
 
 class FontRangeHint(Item):
     _command: Callable = idpg.add_font_range_hint
 
     def __init__(self, hint: int, label: str = None, parent: int = 0, **kwargs):
         super().__init__(hint=hint, label=label, parent=parent, **kwargs)
-
-
         self.hint = hint
         self.label = label
         self.parent = parent
+
 
 class ThemeColor(Item):
     _command: Callable = idpg.add_theme_color
@@ -76,13 +73,12 @@ class ThemeColor(Item):
         category=category,
         **kwargs
         )
-
-
         self.target = target
         self.value = value
         self.label = label
         self.parent = parent
         self.category = category
+
 
 class ThemeStyle(Item):
     _command: Callable = idpg.add_theme_style
@@ -106,8 +102,6 @@ class ThemeStyle(Item):
         category=category,
         **kwargs
         )
-
-
         self.target = target
         self.x = x
         self.y = y
@@ -115,15 +109,15 @@ class ThemeStyle(Item):
         self.parent = parent
         self.category = category
 
+
 class Theme(Item, Context):
     _command: Callable = idpg.add_theme
 
     def __init__(self, label: str = None, default_theme: bool = False, **kwargs):
         super().__init__(label=label, default_theme=default_theme, **kwargs)
-
-
         self.label = label
         self.default_theme = default_theme
+
 
 class Font(Item, Context):
     _command: Callable = idpg.add_font
@@ -145,11 +139,10 @@ class Font(Item, Context):
         parent=parent,
         **kwargs
         )
-
-
         self.file = file
         self.size = size
         self.label = label
         self.default_font = default_font
         self.parent = parent
+
 

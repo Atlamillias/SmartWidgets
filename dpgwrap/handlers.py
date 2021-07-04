@@ -27,12 +27,11 @@ class ActivatedHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class ActiveHandler(Item):
     _command: Callable = idpg.add_active_handler
@@ -52,12 +51,11 @@ class ActiveHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class ClickedHandler(Item):
     _command: Callable = idpg.add_clicked_handler
@@ -79,13 +77,12 @@ class ClickedHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.button = button
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class DeactivatedAfterEditHandler(Item):
     _command: Callable = idpg.add_deactivated_after_edit_handler
@@ -105,12 +102,11 @@ class DeactivatedAfterEditHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class DeactivatedHandler(Item):
     _command: Callable = idpg.add_deactivated_handler
@@ -130,12 +126,11 @@ class DeactivatedHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class EditedHandler(Item):
     _command: Callable = idpg.add_edited_handler
@@ -155,12 +150,11 @@ class EditedHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class FocusHandler(Item):
     _command: Callable = idpg.add_focus_handler
@@ -180,12 +174,11 @@ class FocusHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class HoverHandler(Item):
     _command: Callable = idpg.add_hover_handler
@@ -205,12 +198,11 @@ class HoverHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class KeyDownHandler(Item):
     _command: Callable = idpg.add_key_down_handler
@@ -234,14 +226,13 @@ class KeyDownHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.key = key
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class KeyPressHandler(Item):
     _command: Callable = idpg.add_key_press_handler
@@ -265,14 +256,13 @@ class KeyPressHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.key = key
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class KeyReleaseHandler(Item):
     _command: Callable = idpg.add_key_release_handler
@@ -296,14 +286,13 @@ class KeyReleaseHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.key = key
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class MouseClickHandler(Item):
     _command: Callable = idpg.add_mouse_click_handler
@@ -327,14 +316,13 @@ class MouseClickHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.button = button
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class MouseDoubleClickHandler(Item):
     _command: Callable = idpg.add_mouse_double_click_handler
@@ -358,14 +346,13 @@ class MouseDoubleClickHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.button = button
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class MouseDownHandler(Item):
     _command: Callable = idpg.add_mouse_down_handler
@@ -389,14 +376,13 @@ class MouseDownHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.button = button
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class MouseDragHandler(Item):
     _command: Callable = idpg.add_mouse_drag_handler
@@ -422,8 +408,6 @@ class MouseDragHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.button = button
         self.threshold = threshold
         self.label = label
@@ -431,6 +415,7 @@ class MouseDragHandler(Item):
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class MouseMoveHandler(Item):
     _command: Callable = idpg.add_mouse_move_handler
@@ -452,13 +437,12 @@ class MouseMoveHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class MouseReleaseHandler(Item):
     _command: Callable = idpg.add_mouse_release_handler
@@ -482,14 +466,13 @@ class MouseReleaseHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.button = button
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class MouseWheelHandler(Item):
     _command: Callable = idpg.add_mouse_wheel_handler
@@ -511,13 +494,12 @@ class MouseWheelHandler(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.callback = callback
         self.user_data = user_data
         self.show = show
         self.parent = parent
+
 
 class ResizeHandler(Item):
     _command: Callable = idpg.add_resize_handler
@@ -537,12 +519,11 @@ class ResizeHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class ToggledOpenHandler(Item):
     _command: Callable = idpg.add_toggled_open_handler
@@ -562,12 +543,11 @@ class ToggledOpenHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 
 class VisibleHandler(Item):
     _command: Callable = idpg.add_visible_handler
@@ -587,10 +567,9 @@ class VisibleHandler(Item):
         user_data=user_data,
         **kwargs
         )
-
-
         self.parent = parent
         self.label = label
         self.callback = callback
         self.user_data = user_data
+
 

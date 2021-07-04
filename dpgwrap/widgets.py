@@ -69,8 +69,6 @@ class Slider(Widget):
         scale=scale,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -96,6 +94,7 @@ class Slider(Widget):
         self.min_y = min_y
         self.min_z = min_z
         self.scale = scale
+
 
 class Button(Widget):
     _command: Callable = idpg.add_button
@@ -147,8 +146,6 @@ class Button(Widget):
         direction=direction,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -170,6 +167,7 @@ class Button(Widget):
         self.arrow = arrow
         self.direction = direction
 
+
 class CharRemap(Widget):
     _command: Callable = idpg.add_char_remap
 
@@ -188,12 +186,11 @@ class CharRemap(Widget):
         parent=parent,
         **kwargs
         )
-
-
         self.source = source
         self.target = target
         self.label = label
         self.parent = parent
+
 
 class Checkbox(Widget):
     _command: Callable = idpg.add_checkbox
@@ -239,8 +236,6 @@ class Checkbox(Widget):
         default_value=default_value,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -258,6 +253,7 @@ class Checkbox(Widget):
         self.tracked = tracked
         self.track_offset = track_offset
         self.default_value = default_value
+
 
 class ColorButton(Widget):
     _command: Callable = idpg.add_color_button
@@ -311,8 +307,6 @@ class ColorButton(Widget):
         no_drag_drop=no_drag_drop,
         **kwargs
         )
-
-
         self.default_value = default_value
         self.label = label
         self.width = width
@@ -334,6 +328,7 @@ class ColorButton(Widget):
         self.no_alpha = no_alpha
         self.no_border = no_border
         self.no_drag_drop = no_drag_drop
+
 
 class ColorEdit(Widget):
     _command: Callable = idpg.add_color_edit
@@ -409,8 +404,6 @@ class ColorEdit(Widget):
         input_mode=input_mode,
         **kwargs
         )
-
-
         self.default_value = default_value
         self.label = label
         self.width = width
@@ -443,6 +436,7 @@ class ColorEdit(Widget):
         self.display_mode = display_mode
         self.display_type = display_type
         self.input_mode = input_mode
+
 
 class ColorPicker(Widget):
     _command: Callable = idpg.add_color_picker
@@ -520,8 +514,6 @@ class ColorPicker(Widget):
         input_mode=input_mode,
         **kwargs
         )
-
-
         self.default_value = default_value
         self.label = label
         self.width = width
@@ -555,6 +547,7 @@ class ColorPicker(Widget):
         self.alpha_preview = alpha_preview
         self.display_type = display_type
         self.input_mode = input_mode
+
 
 class ColormapScale(Widget):
     _command: Callable = idpg.add_colormap_scale
@@ -590,8 +583,6 @@ class ColormapScale(Widget):
         max_scale=max_scale,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -604,6 +595,7 @@ class ColormapScale(Widget):
         self.default_value = default_value
         self.min_scale = min_scale
         self.max_scale = max_scale
+
 
 class Combo(Widget):
     _command: Callable = idpg.add_combo
@@ -661,8 +653,6 @@ class Combo(Widget):
         height_mode=height_mode,
         **kwargs
         )
-
-
         self.items = items
         self.label = label
         self.width = width
@@ -686,6 +676,7 @@ class Combo(Widget):
         self.no_arrow_button = no_arrow_button
         self.no_preview = no_preview
         self.height_mode = height_mode
+
 
 class DatePicker(Widget):
     _command: Callable = idpg.add_date_picker
@@ -729,8 +720,6 @@ class DatePicker(Widget):
         level=level,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -747,6 +736,7 @@ class DatePicker(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
         self.level = level
+
 
 class DragFloat(Widget):
     _command: Callable = idpg.add_drag_float
@@ -806,8 +796,6 @@ class DragFloat(Widget):
         clamped=clamped,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -832,6 +820,7 @@ class DragFloat(Widget):
         self.max_value = max_value
         self.no_input = no_input
         self.clamped = clamped
+
 
 class DragFloatx(Widget):
     _command: Callable = idpg.add_drag_floatx
@@ -893,8 +882,6 @@ class DragFloatx(Widget):
         clamped=clamped,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -920,6 +907,7 @@ class DragFloatx(Widget):
         self.max_value = max_value
         self.no_input = no_input
         self.clamped = clamped
+
 
 class DragInt(Widget):
     _command: Callable = idpg.add_drag_int
@@ -979,8 +967,6 @@ class DragInt(Widget):
         clamped=clamped,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -1005,6 +991,7 @@ class DragInt(Widget):
         self.max_value = max_value
         self.no_input = no_input
         self.clamped = clamped
+
 
 class DragIntx(Widget):
     _command: Callable = idpg.add_drag_intx
@@ -1066,8 +1053,6 @@ class DragIntx(Widget):
         clamped=clamped,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -1093,6 +1078,7 @@ class DragIntx(Widget):
         self.max_value = max_value
         self.no_input = no_input
         self.clamped = clamped
+
 
 class DragLine(Widget):
     _command: Callable = idpg.add_drag_line
@@ -1128,8 +1114,6 @@ class DragLine(Widget):
         vertical=vertical,
         **kwargs
         )
-
-
         self.label = label
         self.parent = parent
         self.before = before
@@ -1142,6 +1126,7 @@ class DragLine(Widget):
         self.thickness = thickness
         self.show_label = show_label
         self.vertical = vertical
+
 
 class DragPoint(Widget):
     _command: Callable = idpg.add_drag_point
@@ -1175,8 +1160,6 @@ class DragPoint(Widget):
         show_label=show_label,
         **kwargs
         )
-
-
         self.label = label
         self.parent = parent
         self.before = before
@@ -1188,6 +1171,7 @@ class DragPoint(Widget):
         self.color = color
         self.thickness = thickness
         self.show_label = show_label
+
 
 class Dummy(Widget):
     _command: Callable = idpg.add_dummy
@@ -1215,8 +1199,6 @@ class Dummy(Widget):
         pos=pos,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -1225,6 +1207,7 @@ class Dummy(Widget):
         self.before = before
         self.show = show
         self.pos = pos
+
 
 class DynamicTexture(Widget):
     _command: Callable = idpg.add_dynamic_texture
@@ -1246,13 +1229,12 @@ class DynamicTexture(Widget):
         parent=parent,
         **kwargs
         )
-
-
         self.width = width
         self.height = height
         self.default_value = default_value
         self.label = label
         self.parent = parent
+
 
 class FileExtension(Widget):
     _command: Callable = idpg.add_file_extension
@@ -1280,8 +1262,6 @@ class FileExtension(Widget):
         color=color,
         **kwargs
         )
-
-
         self.extension = extension
         self.label = label
         self.width = width
@@ -1290,6 +1270,7 @@ class FileExtension(Widget):
         self.before = before
         self.custom_text = custom_text
         self.color = color
+
 
 class Image(Widget):
     _command: Callable = idpg.add_image
@@ -1341,8 +1322,6 @@ class Image(Widget):
         uv_max=uv_max,
         **kwargs
         )
-
-
         self.texture_id = texture_id
         self.label = label
         self.width = width
@@ -1363,6 +1342,7 @@ class Image(Widget):
         self.border_color = border_color
         self.uv_min = uv_min
         self.uv_max = uv_max
+
 
 class ImageButton(Widget):
     _command: Callable = idpg.add_image_button
@@ -1422,8 +1402,6 @@ class ImageButton(Widget):
         uv_max=uv_max,
         **kwargs
         )
-
-
         self.texture_id = texture_id
         self.label = label
         self.width = width
@@ -1448,6 +1426,7 @@ class ImageButton(Widget):
         self.background_color = background_color
         self.uv_min = uv_min
         self.uv_max = uv_max
+
 
 class InputFloat(Widget):
     _command: Callable = idpg.add_input_float
@@ -1513,8 +1492,6 @@ class InputFloat(Widget):
         readonly=readonly,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -1542,6 +1519,7 @@ class InputFloat(Widget):
         self.max_clamped = max_clamped
         self.on_enter = on_enter
         self.readonly = readonly
+
 
 class InputFloatx(Widget):
     _command: Callable = idpg.add_input_floatx
@@ -1605,8 +1583,6 @@ class InputFloatx(Widget):
         readonly=readonly,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -1633,6 +1609,7 @@ class InputFloatx(Widget):
         self.max_clamped = max_clamped
         self.on_enter = on_enter
         self.readonly = readonly
+
 
 class InputInt(Widget):
     _command: Callable = idpg.add_input_int
@@ -1696,8 +1673,6 @@ class InputInt(Widget):
         readonly=readonly,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -1724,6 +1699,7 @@ class InputInt(Widget):
         self.max_clamped = max_clamped
         self.on_enter = on_enter
         self.readonly = readonly
+
 
 class InputIntx(Widget):
     _command: Callable = idpg.add_input_intx
@@ -1785,8 +1761,6 @@ class InputIntx(Widget):
         readonly=readonly,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -1812,6 +1786,7 @@ class InputIntx(Widget):
         self.max_clamped = max_clamped
         self.on_enter = on_enter
         self.readonly = readonly
+
 
 class InputText(Widget):
     _command: Callable = idpg.add_input_text
@@ -1883,8 +1858,6 @@ class InputText(Widget):
         on_enter=on_enter,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -1915,6 +1888,7 @@ class InputText(Widget):
         self.password = password
         self.scientific = scientific
         self.on_enter = on_enter
+
 
 class KnobFloat(Widget):
     _command: Callable = idpg.add_knob_float
@@ -1966,8 +1940,6 @@ class KnobFloat(Widget):
         max_value=max_value,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -1988,6 +1960,7 @@ class KnobFloat(Widget):
         self.default_value = default_value
         self.min_value = min_value
         self.max_value = max_value
+
 
 class Listbox(Widget):
     _command: Callable = idpg.add_listbox
@@ -2039,8 +2012,6 @@ class Listbox(Widget):
         num_items=num_items,
         **kwargs
         )
-
-
         self.items = items
         self.label = label
         self.width = width
@@ -2061,6 +2032,7 @@ class Listbox(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
         self.num_items = num_items
+
 
 class LoadingIndicator(Widget):
     _command: Callable = idpg.add_loading_indicator
@@ -2102,8 +2074,6 @@ class LoadingIndicator(Widget):
         secondary_color=secondary_color,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -2119,6 +2089,7 @@ class LoadingIndicator(Widget):
         self.thickness = thickness
         self.color = color
         self.secondary_color = secondary_color
+
 
 class MenuItem(Widget):
     _command: Callable = idpg.add_menu_item
@@ -2164,8 +2135,6 @@ class MenuItem(Widget):
         check=check,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -2183,6 +2152,7 @@ class MenuItem(Widget):
         self.default_value = default_value
         self.shortcut = shortcut
         self.check = check
+
 
 class ProgressBar(Widget):
     _command: Callable = idpg.add_progress_bar
@@ -2228,8 +2198,6 @@ class ProgressBar(Widget):
         default_value=default_value,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -2247,6 +2215,7 @@ class ProgressBar(Widget):
         self.track_offset = track_offset
         self.overlay = overlay
         self.default_value = default_value
+
 
 class RadioButton(Widget):
     _command: Callable = idpg.add_radio_button
@@ -2296,8 +2265,6 @@ class RadioButton(Widget):
         horizontal=horizontal,
         **kwargs
         )
-
-
         self.items = items
         self.label = label
         self.indent = indent
@@ -2317,6 +2284,7 @@ class RadioButton(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
         self.horizontal = horizontal
+
 
 class RawTexture(Widget):
     _command: Callable = idpg.add_raw_texture
@@ -2340,14 +2308,13 @@ class RawTexture(Widget):
         parent=parent,
         **kwargs
         )
-
-
         self.width = width
         self.height = height
         self.default_value = default_value
         self.label = label
         self.format = format
         self.parent = parent
+
 
 class SameLine(Widget):
     _command: Callable = idpg.add_same_line
@@ -2371,14 +2338,13 @@ class SameLine(Widget):
         spacing=spacing,
         **kwargs
         )
-
-
         self.label = label
         self.parent = parent
         self.before = before
         self.show = show
         self.xoffset = xoffset
         self.spacing = spacing
+
 
 class Selectable(Widget):
     _command: Callable = idpg.add_selectable
@@ -2430,8 +2396,6 @@ class Selectable(Widget):
         span_columns=span_columns,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -2452,6 +2416,7 @@ class Selectable(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
         self.span_columns = span_columns
+
 
 class Separator(Widget):
     _command: Callable = idpg.add_separator
@@ -2475,14 +2440,13 @@ class Separator(Widget):
         pos=pos,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
         self.before = before
         self.show = show
         self.pos = pos
+
 
 class SliderFloat(Widget):
     _command: Callable = idpg.add_slider_float
@@ -2544,8 +2508,6 @@ class SliderFloat(Widget):
         format=format,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -2571,6 +2533,7 @@ class SliderFloat(Widget):
         self.min_value = min_value
         self.max_value = max_value
         self.format = format
+
 
 class SliderFloatx(Widget):
     _command: Callable = idpg.add_slider_floatx
@@ -2630,8 +2593,6 @@ class SliderFloatx(Widget):
         format=format,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -2656,6 +2617,7 @@ class SliderFloatx(Widget):
         self.min_value = min_value
         self.max_value = max_value
         self.format = format
+
 
 class SliderInt(Widget):
     _command: Callable = idpg.add_slider_int
@@ -2717,8 +2679,6 @@ class SliderInt(Widget):
         format=format,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -2744,6 +2704,7 @@ class SliderInt(Widget):
         self.min_value = min_value
         self.max_value = max_value
         self.format = format
+
 
 class SliderIntx(Widget):
     _command: Callable = idpg.add_slider_intx
@@ -2803,8 +2764,6 @@ class SliderIntx(Widget):
         format=format,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -2830,6 +2789,7 @@ class SliderIntx(Widget):
         self.max_value = max_value
         self.format = format
 
+
 class Spacing(Widget):
     _command: Callable = idpg.add_spacing
 
@@ -2854,8 +2814,6 @@ class Spacing(Widget):
         count=count,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -2863,6 +2821,7 @@ class Spacing(Widget):
         self.show = show
         self.pos = pos
         self.count = count
+
 
 class StaticTexture(Widget):
     _command: Callable = idpg.add_static_texture
@@ -2884,13 +2843,12 @@ class StaticTexture(Widget):
         parent=parent,
         **kwargs
         )
-
-
         self.width = width
         self.height = height
         self.default_value = default_value
         self.label = label
         self.parent = parent
+
 
 class TabButton(Widget):
     _command: Callable = idpg.add_tab_button
@@ -2936,8 +2894,6 @@ class TabButton(Widget):
         no_tooltip=no_tooltip,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -2955,6 +2911,7 @@ class TabButton(Widget):
         self.leading = leading
         self.trailing = trailing
         self.no_tooltip = no_tooltip
+
 
 class TableColumn(Widget):
     _command: Callable = idpg.add_table_column
@@ -3010,8 +2967,6 @@ class TableColumn(Widget):
         indent_disable=indent_disable,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.parent = parent
@@ -3035,6 +2990,7 @@ class TableColumn(Widget):
         self.indent_enable = indent_enable
         self.indent_disable = indent_disable
 
+
 class TableNextColumn(Widget):
     _command: Callable = idpg.add_table_next_column
 
@@ -3053,12 +3009,11 @@ class TableNextColumn(Widget):
         show=show,
         **kwargs
         )
-
-
         self.label = label
         self.parent = parent
         self.before = before
         self.show = show
+
 
 class Text(Widget):
     _command: Callable = idpg.add_text
@@ -3100,8 +3055,6 @@ class Text(Widget):
         show_label=show_label,
         **kwargs
         )
-
-
         self.default_value = default_value
         self.label = label
         self.indent = indent
@@ -3117,6 +3070,7 @@ class Text(Widget):
         self.bullet = bullet
         self.color = color
         self.show_label = show_label
+
 
 class TextPoint(Widget):
     _command: Callable = idpg.add_text_point
@@ -3150,8 +3104,6 @@ class TextPoint(Widget):
         vertical=vertical,
         **kwargs
         )
-
-
         self.x = x
         self.y = y
         self.label = label
@@ -3163,6 +3115,7 @@ class TextPoint(Widget):
         self.y_offset = y_offset
         self.contribute_to_bounds = contribute_to_bounds
         self.vertical = vertical
+
 
 class TimePicker(Widget):
     _command: Callable = idpg.add_time_picker
@@ -3206,8 +3159,6 @@ class TimePicker(Widget):
         hour24=hour24,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -3224,4 +3175,5 @@ class TimePicker(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
         self.hour24 = hour24
+
 

@@ -61,8 +61,6 @@ class Child(Container):
         menubar=menubar,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -84,6 +82,7 @@ class Child(Container):
         self.no_scrollbar = no_scrollbar
         self.horizontal_scrollbar = horizontal_scrollbar
         self.menubar = menubar
+
 
 class Clipper(Container):
     _command: Callable = idpg.add_clipper
@@ -109,8 +108,6 @@ class Clipper(Container):
         delay_search=delay_search,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -118,6 +115,7 @@ class Clipper(Container):
         self.before = before
         self.show = show
         self.delay_search = delay_search
+
 
 class CollapsingHeader(Container):
     _command: Callable = idpg.add_collapsing_header
@@ -167,8 +165,6 @@ class CollapsingHeader(Container):
         bullet=bullet,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -188,6 +184,7 @@ class CollapsingHeader(Container):
         self.open_on_arrow = open_on_arrow
         self.leaf = leaf
         self.bullet = bullet
+
 
 class DragPayload(Container):
     _command: Callable = idpg.add_drag_payload
@@ -209,13 +206,12 @@ class DragPayload(Container):
         payload_type=payload_type,
         **kwargs
         )
-
-
         self.label = label
         self.parent = parent
         self.show = show
         self.drag_data = drag_data
         self.payload_type = payload_type
+
 
 class FileDialog(Container):
     _command: Callable = idpg.add_file_dialog
@@ -249,8 +245,6 @@ class FileDialog(Container):
         directory_selector=directory_selector,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -262,6 +256,7 @@ class FileDialog(Container):
         self.file_count = file_count
         self.modal = modal
         self.directory_selector = directory_selector
+
 
 class FilterSet(Container):
     _command: Callable = idpg.add_filter_set
@@ -287,8 +282,6 @@ class FilterSet(Container):
         delay_search=delay_search,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -296,6 +289,7 @@ class FilterSet(Container):
         self.before = before
         self.show = show
         self.delay_search = delay_search
+
 
 class Group(Container):
     _command: Callable = idpg.add_group
@@ -339,8 +333,6 @@ class Group(Container):
         horizontal_spacing=horizontal_spacing,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.indent = indent
@@ -357,6 +349,7 @@ class Group(Container):
         self.track_offset = track_offset
         self.horizontal = horizontal
         self.horizontal_spacing = horizontal_spacing
+
 
 class Menu(Container):
     _command: Callable = idpg.add_menu
@@ -394,8 +387,6 @@ class Menu(Container):
         track_offset=track_offset,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -409,6 +400,7 @@ class Menu(Container):
         self.delay_search = delay_search
         self.tracked = tracked
         self.track_offset = track_offset
+
 
 class MenuBar(Container):
     _command: Callable = idpg.add_menu_bar
@@ -430,22 +422,20 @@ class MenuBar(Container):
         delay_search=delay_search,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
         self.show = show
         self.delay_search = delay_search
 
+
 class StagingContainer(Container):
     _command: Callable = idpg.add_staging_container
 
     def __init__(self, label: str = None, **kwargs):
         super().__init__(label=label, **kwargs)
-
-
         self.label = label
+
 
 class Tab(Container):
     _command: Callable = idpg.add_tab
@@ -487,8 +477,6 @@ class Tab(Container):
         order_mode=order_mode,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -504,6 +492,7 @@ class Tab(Container):
         self.closable = closable
         self.no_tooltip = no_tooltip
         self.order_mode = order_mode
+
 
 class TabBar(Container):
     _command: Callable = idpg.add_tab_bar
@@ -547,8 +536,6 @@ class TabBar(Container):
         reorderable=reorderable,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -565,6 +552,7 @@ class TabBar(Container):
         self.tracked = tracked
         self.track_offset = track_offset
         self.reorderable = reorderable
+
 
 class Table(Container):
     _command: Callable = idpg.add_table
@@ -654,8 +642,6 @@ class Table(Container):
         scrollY=scrollY,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -696,6 +682,7 @@ class Table(Container):
         self.scrollX = scrollX
         self.scrollY = scrollY
 
+
 class TableRow(Container):
     _command: Callable = idpg.add_table_row
 
@@ -718,8 +705,6 @@ class TableRow(Container):
         filter_key=filter_key,
         **kwargs
         )
-
-
         self.label = label
         self.height = height
         self.parent = parent
@@ -727,16 +712,16 @@ class TableRow(Container):
         self.show = show
         self.filter_key = filter_key
 
+
 class Tooltip(Container):
     _command: Callable = idpg.add_tooltip
 
     def __init__(self, parent: str, label: str = None, show: bool = True, **kwargs):
         super().__init__(parent=parent, label=label, show=show, **kwargs)
-
-
         self.parent = parent
         self.label = label
         self.show = show
+
 
 class TreeNode(Container):
     _command: Callable = idpg.add_tree_node
@@ -786,8 +771,6 @@ class TreeNode(Container):
         selectable=selectable,
         **kwargs
         )
-
-
         self.label = label
         self.indent = indent
         self.parent = parent
@@ -807,6 +790,7 @@ class TreeNode(Container):
         self.leaf = leaf
         self.bullet = bullet
         self.selectable = selectable
+
 
 class Window(Container):
     _command: Callable = idpg.add_window
@@ -870,8 +854,6 @@ class Window(Container):
         on_close=on_close,
         **kwargs
         )
-
-
         self.label = label
         self.width = width
         self.height = height
@@ -898,4 +880,5 @@ class Window(Container):
         self.modal = modal
         self.popup = popup
         self.on_close = on_close
+
 

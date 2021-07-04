@@ -14,37 +14,33 @@ class FontRegistry(Item, Context):
 
     def __init__(self, label: str = None, show: bool = True, **kwargs):
         super().__init__(label=label, show=show, **kwargs)
-
-
         self.label = label
         self.show = show
+
 
 class HandlerRegistry(Item, Context):
     _command: Callable = idpg.add_handler_registry
 
     def __init__(self, label: str = None, show: bool = True, **kwargs):
         super().__init__(label=label, show=show, **kwargs)
-
-
         self.label = label
         self.show = show
+
 
 class TextureRegistry(Item, Context):
     _command: Callable = idpg.add_texture_registry
 
     def __init__(self, label: str = None, show: bool = False, **kwargs):
         super().__init__(label=label, show=show, **kwargs)
-
-
         self.label = label
         self.show = show
+
 
 class ValueRegistry(Item, Context):
     _command: Callable = idpg.add_value_registry
 
     def __init__(self, label: str = None, **kwargs):
         super().__init__(label=label, **kwargs)
-
-
         self.label = label
+
 

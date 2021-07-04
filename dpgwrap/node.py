@@ -27,12 +27,11 @@ class BoolValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class ColorValue(Item):
     _command: Callable = idpg.add_color_value
@@ -52,12 +51,11 @@ class ColorValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class Double4Value(Item):
     _command: Callable = idpg.add_double4_value
@@ -77,12 +75,11 @@ class Double4Value(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class DoubleValue(Item):
     _command: Callable = idpg.add_double_value
@@ -102,12 +99,11 @@ class DoubleValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class Float4Value(Item):
     _command: Callable = idpg.add_float4_value
@@ -127,12 +123,11 @@ class Float4Value(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class FloatValue(Item):
     _command: Callable = idpg.add_float_value
@@ -152,12 +147,11 @@ class FloatValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class FloatVectValue(Item):
     _command: Callable = idpg.add_float_vect_value
@@ -177,12 +171,11 @@ class FloatVectValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class Int4Value(Item):
     _command: Callable = idpg.add_int4_value
@@ -202,12 +195,11 @@ class Int4Value(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class IntValue(Item):
     _command: Callable = idpg.add_int_value
@@ -227,12 +219,11 @@ class IntValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class SeriesValue(Item):
     _command: Callable = idpg.add_series_value
@@ -252,12 +243,11 @@ class SeriesValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
 class StringValue(Item):
     _command: Callable = idpg.add_string_value
@@ -277,10 +267,9 @@ class StringValue(Item):
         parent=parent,
         **kwargs
         )
-
-
         self.label = label
         self.source = source
         self.default_value = default_value
         self.parent = parent
+
 
