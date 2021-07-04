@@ -3175,5 +3175,3 @@ class TimePicker(Widget):
         self.track_offset = track_offset
         self.default_value = default_value
         self.hour24 = hour24
-
-

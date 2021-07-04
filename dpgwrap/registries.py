@@ -42,5 +42,3 @@ class ValueRegistry(Item, Context):
     def __init__(self, label: str = None, **kwargs):
         super().__init__(label=label, **kwargs)
         self.label = label
-
-

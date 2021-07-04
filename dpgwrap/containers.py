@@ -880,5 +880,3 @@ class Window(Container):
         self.modal = modal
         self.popup = popup
         self.on_close = on_close
-
-

@@ -571,5 +571,3 @@ class VisibleHandler(Item):
         self.label = label
         self.callback = callback
         self.user_data = user_data
-
-

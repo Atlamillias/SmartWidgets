@@ -144,5 +144,3 @@ class Font(Item, Context):
         self.label = label
         self.default_font = default_font
         self.parent = parent
-
-

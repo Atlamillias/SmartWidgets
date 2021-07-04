@@ -271,5 +271,3 @@ class StringValue(Item):
         self.source = source
         self.default_value = default_value
         self.parent = parent
-
-
