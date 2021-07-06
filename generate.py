@@ -1,30 +1,39 @@
+from datetime import datetime
+from pathlib import Path
+from dataclasses import dataclass, field, is_dataclass
 from inspect import signature
+
 from dearpygui import dearpygui as dpg, core as idpg
 
 
-# To-do: 
-# - Edit misc info in __init__.py
-# - Encapsulate file info (imports, etc) w/mappings
+DEFAULT_DIRPATH = "./dpgwrap"
+
+DPG_CONSTANTS = {}
+
+
+@dataclass
+class ItemFile:
+    category: str
+    import_lines: list = field(default_factory=list)
+    mapping: dict = field(default_factory=dict)
 
 
 class ItemMaps:
     @classmethod
-    def item_categories(cls):
-        attrs = []
+    def files(cls):
+        items = []
         for attr in dir(cls):
             if "__" in attr:
                 continue
-            elif attr in ("registered_cmds", "items"):
+            elif not is_dataclass(getattr(cls, attr)):
                 continue
-            elif type(getattr(cls, attr)) != dict:
-                continue
-            attrs.append(attr)
-        return attrs
+            items.append(getattr(cls, attr))
+        return items
 
     @classmethod
     def commands(cls):
-        cmds = (getattr(cls, item) for item in cls.item_categories())
-        return {cmd[-1] for sublist in cmds for cmd in sublist.values()}
+        cmds = ItemMaps.files()
+        return {cmd[-1] for sublist in cmds for cmd in sublist.mapping.values()}
 
 
     # Only container items need to be specifically listed.
@@ -40,7 +49,10 @@ class ItemMaps:
     # subclass the Item and Context classes add those extras to 
     # items subclassing Container and Widget.
 
-    containers = {
+    containers = ItemFile(
+        "containers",
+        ["from ._widget import Container",], 
+        {
         "Child": ("Container", "add_child",),
         "Clipper": ("Container", "add_clipper"),
         "CollapsingHeader": ("Container", "add_collapsing_header"),
@@ -58,36 +70,67 @@ class ItemMaps:
         "Tooltip": ("Container", "add_tooltip"),
         "TreeNode": ("Container", "add_tree_node"),
         "Window": ("Container", "add_window"),
-    }
-    widgets = {}
-    drawing = {
-        "ViewportDrawlist": ("Container", "add_viewport_drawlist"),
-        "Drawlist": ("Container", "add_drawlist"),
-        "DrawLayer": ("Container", "add_draw_layer"),
-    }
-    plotting = {
+        }
+    )
+    widgets = ItemFile(
+        "widgets",
+        ["from ._widget import Widget",],
+    )
+    drawing = ItemFile(
+        "drawing",
+        ["from ._widget import Container, Widget",],
+        {
+            "ViewportDrawlist": ("Container", "add_viewport_drawlist"),
+            "Drawlist": ("Container", "add_drawlist"),
+            "DrawLayer": ("Container", "add_draw_layer"),
+        }
+    )
+    plotting = ItemFile(
+        "plotting",
+        ["from ._widget import Container, Widget"],
+        {
         "Plot": ("Container", "add_plot")
-    }
-    node = {
-        "Node": ("Container", "add_node"),
-        "NodeAttribute": ("Container", "add_node_attribute"),
-        "NodeEditor": ("Container", "add_node_editor"),
-    }
-    valueitems = {}
-    registries = {
-        "FontRegistry": ("Item, Context", "add_font_registry"),
-        "HandlerRegistry": ("Item, Context", "add_handler_registry"),
-        "TextureRegistry": ("Item, Context", "add_texture_registry"),
-        "ValueRegistry": ("Item, Context", "add_value_registry"),
-    }
-    handlers = {}
-    stylize = {
-        "Theme": ("Item, Context", "add_theme"),
-        "Font": ("Item, Context", "add_font"),
-    }
+        }
+    )
+    node = ItemFile(
+        "node",
+        ["from ._widget import Container, Widget"],
+        {
+            "Node": ("Container", "add_node"),
+            "NodeAttribute": ("Container", "add_node_attribute"),
+            "NodeEditor": ("Container", "add_node_editor"),
+        }
+    )
+    valueitems = ItemFile(
+        "valueitems",
+        ["from ._item import Item"],
+        
+    )
+    registries = ItemFile(
+        "registries",
+        ["from ._item import Item, Context"],
+        {
+            "FontRegistry": ("Item, Context", "add_font_registry"),
+            "HandlerRegistry": ("Item, Context", "add_handler_registry"),
+            "TextureRegistry": ("Item, Context", "add_texture_registry"),
+            "ValueRegistry": ("Item, Context", "add_value_registry"),
+        }
+    )
+    handlers = ItemFile(
+        "handlers",
+        ["from ._item import Item"],
+        
+    )
+    stylize = ItemFile(
+        "stylize",
+        ["from ._item import Item, Context"],
+        {
+            "Theme": ("Item, Context", "add_theme"),
+            "Font": ("Item, Context", "add_font"),
+        }
+    )
 
 
-DPG_CONSTANTS = {}
 
 def _organize(mapping: dict):
     mapping = sorted(mapping.items(), key=lambda x: x[1][0])
@@ -95,7 +138,7 @@ def _organize(mapping: dict):
 
 
 def populate():
-    def name_fix(string):
+    def name_fix(string): # if name starts with any number
         if string[0].isdigit():
             return string[2:]
         return string
@@ -111,64 +154,53 @@ def populate():
         if attr.startswith("add_"):
             name = attr.replace("add_", "").title().replace("_","")
             if attr.startswith("add_node_"):
-                mapping, info = ItemMaps.node, ("Widget", attr)
+                mapping, info = ItemMaps.node.mapping, ("Widget", attr)
             elif attr.endswith("_registry"):
-                mapping, info = ItemMaps.registries, ("Item, Context", attr)
+                mapping, info = ItemMaps.registries.mapping, ("Item, Context", attr)
             elif attr.endswith("_value"):
-                mapping, info = ItemMaps.valueitems, ("Item", attr)
+                mapping, info = ItemMaps.valueitems.mapping, ("Item", attr)
             elif attr.endswith("_handler"):
-                mapping, info = ItemMaps.handlers, ("Item", attr)
+                mapping, info = ItemMaps.handlers.mapping, ("Item", attr)
             elif any(kw in attr for kw in ("theme", "font")):
-                mapping, info = ItemMaps.stylize, ("Item", attr)
+                mapping, info = ItemMaps.stylize.mapping, ("Item", attr)
             elif any(kw in attr for kw in ("plot", "series")):
-                mapping, info = ItemMaps.plotting, ("Widget", attr)
+                mapping, info = ItemMaps.plotting.mapping, ("Widget", attr)
             else:
-                mapping, info = ItemMaps.widgets, ("Widget", attr)
+                mapping, info = ItemMaps.widgets.mapping, ("Widget", attr)
             mapping[name_fix(name)] = info
 
         elif attr.startswith("draw_"):
             name = attr.replace("draw_", "").title().replace("_","")
-            ItemMaps.drawing[name_fix(name)] = "Widget", attr
+            ItemMaps.drawing.mapping[name_fix(name)] = "Widget", attr
 
+        # currently unused
         elif attr.startswith("mv"):
             DPG_CONSTANTS[attr.replace("mv","")] = attr
 
-        else:
-            print(attr,":", attr)
 
-
-
-def writefiles():
+def writefiles(dirpath: str = DEFAULT_DIRPATH):
     def indent(indents: int = 1):
         ind = "    " * indents
         return ind
 
-    dirname = "dpgwrap/"
-    files = (
-        (f"{dirname}containers.py", "._widget", "Container", ItemMaps.containers),
-        (f"{dirname}widgets.py", "._widget", "Widget", ItemMaps.widgets),
-        (f"{dirname}handlers.py", "._item", "Item", ItemMaps.handlers),
-        (f"{dirname}stylize.py", "._item", "Item, Context", ItemMaps.stylize),
-        (f"{dirname}registries.py", "._item", "Item, Context", ItemMaps.registries),
-        (f"{dirname}valueitems.py", "._item", "Item", ItemMaps.valueitems),
-        (f"{dirname}node.py", "._widget", "Container, Widget", ItemMaps.node),
-        (f"{dirname}plotting.py", "._widget", "Container, Widget", ItemMaps.plotting),
-        (f"{dirname}drawing.py", "._widget", "Container, Widget", ItemMaps.drawing)
-    )
+    files = [[Path(dirpath,f"{ifile.category}.py"), 
+              ifile.import_lines, 
+              ifile.mapping] for ifile in ItemMaps.files()]
 
-
-    for filename, module, obj, mapping in files:
+    for filename, ilines, mapping in files:
         with open(filename, "w") as pyfile:
             importlines = [
                 "from typing import Callable, Any\n",
                 "\n"
                 "from . import idpg\n",
-                f"from {module} import {obj}\n\n\n",
-                "##################################################\n"                
+            ]
+            [importlines.append(f"{iline}\n") for iline in ilines]
+            importlines += [
+                "\n\n"
+                "##################################################\n"
                 "## Note: this file was automatically generated. ##\n"
                 "##################################################\n"
             ]
-
             pyfile.writelines(importlines)
 
             mapping = _organize(mapping)
@@ -187,8 +219,6 @@ def writefiles():
                 params = signature(getattr(dpg, cmd)).parameters
                 instance_attrs = [str(attr) for attr in params.keys()]
                 init_params = []
-
-                
 
                 for para in params.values():
                     para = str(para)
@@ -222,8 +252,6 @@ def writefiles():
                     line += f"\n    ):\n{indent(2)}"
                 clslines.append(line)
 
-
-
                 # super()
                 line = "super().__init__("
                 if len(instance_attrs) == 0:
@@ -242,6 +270,27 @@ def writefiles():
                 clslines.append(line)
                 
                 pyfile.writelines(clslines)
+    
+    # __init__.py
+    with open(Path(dirpath,"__init__.py"), "w") as pyfile:
+        lines = [
+                    "from dearpygui import core as idpg, dearpygui as dpg\n",
+                    "\n",
+                ]
+
+        # __all__
+        line = f"__all__ = [\n"
+        line += "\n".join(f"{indent()}'{item.category}'," for item in ItemMaps.files())
+        line += "\n" + "\n".join(f"{indent()}'{imp}'," for imp in ("idpg", "dpg")) + "\n"
+        line += "]\n\n"
+        lines.append(line)
+
+        lines += [
+                    f"__updated__ = '{datetime.today().date()}'\n",
+                    f"__dpg_ver__ = '{idpg.get_dearpygui_version()}'\n",
+                 ]
+        
+        pyfile.writelines(lines)
 
 
 def main():
