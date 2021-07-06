@@ -13,18 +13,18 @@ class Widget(Item, metaclass=ABCMeta):
         super().__init__(**kwargs)
 
     def move_up(self):
-        idpg.move_item_up(self.__id)
+        idpg.move_item_up(self.id)
 
     def move_down(self):
-        idpg.move_item_down(self.__id)
+        idpg.move_item_down(self.id)
 
     def move(self, parent: int, before: int):
         """Move a widget to another <parent> before <before>."""
-        idpg.move_item(self.__id, parent, before)
+        idpg.move_item(self.id, parent, before)
 
     def refresh(self):
         """Deletes all children in the widget, if any."""
-        idpg.delete_item(self.__id, children_only=True)
+        idpg.delete_item(self.id, children_only=True)
 
 
 class Container(Widget, Context, metaclass=ABCMeta):

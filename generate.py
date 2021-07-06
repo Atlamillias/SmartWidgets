@@ -281,7 +281,6 @@ def writefiles(dirpath: str = DEFAULT_DIRPATH):
         # __all__
         line = f"__all__ = [\n"
         line += "\n".join(f"{indent()}'{item.category}'," for item in ItemMaps.files())
-        line += "\n" + "\n".join(f"{indent()}'{imp}'," for imp in ("idpg", "dpg")) + "\n"
         line += "]\n\n"
         lines.append(line)
 
@@ -296,3 +295,7 @@ def writefiles(dirpath: str = DEFAULT_DIRPATH):
 def main():
     populate()
     writefiles()
+
+
+if __name__ == '__main__':
+    main()
