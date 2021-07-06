@@ -1,8 +1,8 @@
 from dearpygui import core as idpg
 
 
-__updated__ = "20210704"
-__dpg_ver__ = "0.8.12"
+__updated__ = "20210706"
+__dpg_ver__ = "0.8.16"
 
 
 def supports_version_check(show_ver = True):

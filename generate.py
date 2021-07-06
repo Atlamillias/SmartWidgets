@@ -5,6 +5,11 @@ from pathlib import Path
 from dearpygui import dearpygui as dpg, core as idpg
 
 
+# To-do: 
+# - Edit misc info in __init__.py
+# - Encapsulate file info (imports, etc) w/mappings
+
+
 class ItemMaps:
     @classmethod
     def item_categories(cls):
