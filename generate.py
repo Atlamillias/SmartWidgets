@@ -244,14 +244,6 @@ def writefiles():
                 pyfile.writelines(clslines)
 
 
-populate()
-writefiles()
-
-from pprint import pprint
-
-for itemtype in ItemMaps.item_categories():
-    mapping = getattr(ItemMaps, itemtype)
-
-    print(itemtype)
-    pprint(_organize(mapping))
-    print()
+def main():
+    populate()
+    writefiles()
