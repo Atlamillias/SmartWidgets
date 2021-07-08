@@ -69,6 +69,7 @@ class ItemMaps:
         "TableRow": ("Container", "add_table_row"),
         "Tooltip": ("Container", "add_tooltip"),
         "TreeNode": ("Container", "add_tree_node"),
+        "ViewportMenuBar": ("Container", "add_viewport_menu_bar"),
         "Window": ("Container", "add_window"),
         }
     )
