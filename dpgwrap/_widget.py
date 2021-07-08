@@ -22,9 +22,7 @@ class Widget(Item, metaclass=ABCMeta):
         """Move a widget to another <parent> before <before>."""
         idpg.move_item(self.id, parent, before)
 
-    def refresh(self):
-        """Deletes all children in the widget, if any."""
-        idpg.delete_item(self.id, children_only=True)
+
 
 
 class Container(Widget, Context, metaclass=ABCMeta):

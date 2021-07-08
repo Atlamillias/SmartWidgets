@@ -138,7 +138,7 @@ def _organize(mapping: dict):
 
 
 def populate():
-    def name_fix(string): # if name starts with any number
+    def name_fix(string):  # if name starts with any number
         if string[0].isdigit():
             return string[2:]
         return string
@@ -152,30 +152,31 @@ def populate():
             continue
 
         if attr.startswith("add_"):
-            name = attr.replace("add_", "").title().replace("_","")
+            name = attr.replace("add_", "").title().replace("_", "")
             if attr.startswith("add_node_"):
                 mapping, info = ItemMaps.node.mapping, ("Widget", attr)
             elif attr.endswith("_registry"):
-                mapping, info = ItemMaps.registries.mapping, ("Item, Context", attr)
+                mapping, info = ItemMaps.registries.mapping, (
+                    "Item, Context", attr)
             elif attr.endswith("_value"):
                 mapping, info = ItemMaps.valueitems.mapping, ("Item", attr)
             elif attr.endswith("_handler"):
                 mapping, info = ItemMaps.handlers.mapping, ("Item", attr)
             elif any(kw in attr for kw in ("theme", "font")):
                 mapping, info = ItemMaps.stylize.mapping, ("Item", attr)
-            elif any(kw in attr for kw in ("plot", "series")):
+            elif any(kw in attr for kw in ("plot", "series", "_point")):
                 mapping, info = ItemMaps.plotting.mapping, ("Widget", attr)
             else:
                 mapping, info = ItemMaps.widgets.mapping, ("Widget", attr)
             mapping[name_fix(name)] = info
 
         elif attr.startswith("draw_"):
-            name = attr.replace("draw_", "").title().replace("_","")
+            name = attr.replace("draw_", "").title().replace("_", "")
             ItemMaps.drawing.mapping[name_fix(name)] = "Widget", attr
 
         # currently unused
         elif attr.startswith("mv"):
-            DPG_CONSTANTS[attr.replace("mv","")] = attr
+            DPG_CONSTANTS[attr.replace("mv", "")] = attr
 
 
 def writefiles(dirpath: str = DEFAULT_DIRPATH):

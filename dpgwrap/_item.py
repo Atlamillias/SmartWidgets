@@ -12,19 +12,11 @@ class Item(metaclass=ABCMeta):
     __config = set()
 
     def __init__(self, **kwargs):
-        # parent was previously handled
-        # via property
         if parent := kwargs.pop("parent", None):
-            if isinstance(parent, Context):
-                idpg.push_container_stack(parent)
-            else:
-                kwargs["parent"] = parent.id
-                parent = None
+            kwargs["parent"] = int(parent)
 
+        kwargs["label"] = kwargs.get('label', self.__class__.__name__)
         self.__id = self._command(**kwargs)
-
-        if parent:
-            idpg.pop_container_stack()
 
         [self.__config.add(optn) for optn in kwargs.keys()]
 
@@ -71,6 +63,10 @@ class Item(metaclass=ABCMeta):
     def remove(self):
         """Deletes the widget (and children)."""
         idpg.delete_item(self.__id)
+
+    def refresh(self):
+        """Deletes all children in the widget, if any."""
+        idpg.delete_item(self.id, children_only=True)
 
     def configure(self, **config):
         """Updates the widget configuration."""
