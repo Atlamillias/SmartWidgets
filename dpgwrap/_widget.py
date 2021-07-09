@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Callable
 
-from . import idpg
+from . import dpg
 from ._item import Item, Context
 
 
@@ -13,14 +13,14 @@ class Widget(Item, metaclass=ABCMeta):
         super().__init__(**kwargs)
 
     def move_up(self):
-        idpg.move_item_up(self.id)
+        dpg.move_item_up(self.id)
 
     def move_down(self):
-        idpg.move_item_down(self.id)
+        dpg.move_item_down(self.id)
 
     def move(self, parent: int, before: int):
         """Move a widget to another <parent> before <before>."""
-        idpg.move_item(self.id, parent, before)
+        dpg.move_item(self.id, parent, before)
 
 
 
