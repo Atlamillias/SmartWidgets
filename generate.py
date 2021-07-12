@@ -3,6 +3,7 @@ from pathlib import Path
 from dataclasses import dataclass, field, is_dataclass
 from inspect import signature, getfile
 import shutil
+import typing
 
 from dearpygui import dearpygui as dpg, core as idpg
 
@@ -157,7 +158,9 @@ def populate():
         lines = dpgfile.readlines()
 
     commands = ItemMaps.commands()
-    core_dir = dir(idpg)[:]
+    core_dir = [attr for attr in dir(idpg)
+                if not attr.startswith("__")
+                or attr in typing.__all__]
 
     for index, line in enumerate(lines):
         if line.startswith("@contextmanager"):
@@ -170,8 +173,8 @@ def populate():
 
             ItemMaps.containers.mapping[name] = "Container", func_str
 
-    # iterating core because it has less clutter (imports, etc.)
-    for attr in dir(idpg):
+    # iterating core
+    for attr in core_dir:
         # undesirables
         if not any(attr.startswith(kw) for kw in ("add_", "draw_", "mv")):
             continue
