@@ -1,12 +1,14 @@
 from datetime import datetime
 from pathlib import Path
 from dataclasses import dataclass, field, is_dataclass
-from inspect import signature
+from inspect import signature, getfile
+import shutil
 
-from dearpygui import dearpygui as dpg
+from dearpygui import dearpygui as dpg, core as idpg
 
 
-DEFAULT_DIRPATH = "./dpgwrap"
+DEFAULT_DIR = "./dpgwrap"
+DEFAULT_BACKUP_DIR = "./backup"
 
 DPG_CONSTANTS = {}
 
@@ -32,9 +34,9 @@ class ItemMaps:
 
     @classmethod
     def commands(cls):
-        cmds = ItemMaps.files()
-        return {cmd[-1] for sublist in cmds for cmd in sublist.mapping.values()}
+        values = [file.mapping for file in cls.files()]
 
+        return {cmd for filedict in values for _, cmd in filedict.values()}
 
     # Only container items need to be specifically listed.
     # Remaining items are inferred from their function
@@ -46,40 +48,40 @@ class ItemMaps:
     # items hard-coded below are all containers, some inherit
     # from "Item, Context" which is basically the "Container"
     # class without "extras" (handlers, themes, etc). Items that
-    # subclass the Item and Context classes add those extras to 
+    # subclass the Item and Context classes add those extras to
     # items subclassing Container and Widget.
 
     containers = ItemFile(
         "containers",
-        ["from ._widget import Container",], 
+        ["from ._widget import Container", ],
         {
-        "Child": ("Container", "add_child",),
-        "Clipper": ("Container", "add_clipper"),
-        "CollapsingHeader": ("Container", "add_collapsing_header"),
-        "DragPayload": ("Container", "add_drag_payload"),
-        "FileDialog": ("Container", "add_file_dialog"),
-        "FilterSet": ("Container", "add_filter_set"),
-        "Group": ("Container", "add_group"),
-        "Menu": ("Container", "add_menu"),
-        "MenuBar": ("Container", "add_menu_bar"),
-        "StagingContainer": ("Container", "add_staging_container"),
-        "Tab": ("Container", "add_tab"),
-        "TabBar": ("Container", "add_tab_bar"),
-        "Table": ("Container", "add_table"),
-        "TableRow": ("Container", "add_table_row"),
-        "Tooltip": ("Container", "add_tooltip"),
-        "TreeNode": ("Container", "add_tree_node"),
-        "ViewportMenuBar": ("Container", "add_viewport_menu_bar"),
-        "Window": ("Container", "add_window"),
+            "Child": ("Container", "add_child",),
+            "Clipper": ("Container", "add_clipper"),
+            "CollapsingHeader": ("Container", "add_collapsing_header"),
+            "DragPayload": ("Container", "add_drag_payload"),
+            "FileDialog": ("Container", "add_file_dialog"),
+            "FilterSet": ("Container", "add_filter_set"),
+            "Group": ("Container", "add_group"),
+            "Menu": ("Container", "add_menu"),
+            "MenuBar": ("Container", "add_menu_bar"),
+            "StagingContainer": ("Container", "add_staging_container"),
+            "Tab": ("Container", "add_tab"),
+            "TabBar": ("Container", "add_tab_bar"),
+            "Table": ("Container", "add_table"),
+            "TableRow": ("Container", "add_table_row"),
+            "Tooltip": ("Container", "add_tooltip"),
+            "TreeNode": ("Container", "add_tree_node"),
+            "ViewportMenuBar": ("Container", "add_viewport_menu_bar"),
+            "Window": ("Container", "add_window"),
         }
     )
     widgets = ItemFile(
         "widgets",
-        ["from ._widget import Widget",],
+        ["from ._widget import Widget", ],
     )
     drawing = ItemFile(
         "drawing",
-        ["from ._widget import Container, Widget",],
+        ["from ._widget import Container, Widget", ],
         {
             "ViewportDrawlist": ("Container", "add_viewport_drawlist"),
             "Drawlist": ("Container", "add_drawlist"),
@@ -90,7 +92,7 @@ class ItemMaps:
         "plotting",
         ["from ._widget import Container, Widget"],
         {
-        "Plot": ("Container", "add_plot")
+            "Plot": ("Container", "add_plot")
         }
     )
     node = ItemFile(
@@ -105,7 +107,7 @@ class ItemMaps:
     valueitems = ItemFile(
         "valueitems",
         ["from ._item import Item"],
-        
+
     )
     registries = ItemFile(
         "registries",
@@ -120,7 +122,7 @@ class ItemMaps:
     handlers = ItemFile(
         "handlers",
         ["from ._item import Item"],
-        
+
     )
     stylize = ItemFile(
         "stylize",
@@ -132,10 +134,16 @@ class ItemMaps:
     )
 
 
-
 def _organize(mapping: dict):
     mapping = sorted(mapping.items(), key=lambda x: x[1][0])
     return mapping
+
+
+def _backup_existing():
+    for pyfile in Path(DEFAULT_DIR).iterdir():
+        if pyfile.suffix == ".py":
+            shutil.copy(str(pyfile), DEFAULT_BACKUP_DIR)
+
 
 
 def populate():
@@ -144,8 +152,26 @@ def populate():
             return string[2:]
         return string
 
-    # iterating dearpygui
-    for attr in dir(dpg):
+    # fetching containers
+    with open(getfile(dpg), "r") as dpgfile:
+        lines = dpgfile.readlines()
+
+    commands = ItemMaps.commands()
+    core_dir = dir(idpg)[:]
+
+    for index, line in enumerate(lines):
+        if line.startswith("@contextmanager"):
+            name = lines[index + 1].split("(")[0].replace("def ", "")
+            func_str = f"add_{name}"
+            if func_str in commands or func_str not in core_dir:
+                continue
+
+            name = name.title().replace("_", "")
+
+            ItemMaps.containers.mapping[name] = "Container", func_str
+
+    # iterating core because it has less clutter (imports, etc.)
+    for attr in dir(idpg):
         # undesirables
         if not any(attr.startswith(kw) for kw in ("add_", "draw_", "mv")):
             continue
@@ -180,13 +206,15 @@ def populate():
             DPG_CONSTANTS[attr.replace("mv", "")] = attr
 
 
-def writefiles(dirpath: str = DEFAULT_DIRPATH):
+def writefiles(dirpath: str = DEFAULT_DIR):
     def indent(indents: int = 1):
         ind = "    " * indents
         return ind
 
-    files = [[Path(dirpath,f"{ifile.category}.py"), 
-              ifile.import_lines, 
+    _backup_existing()
+
+    files = [[Path(dirpath, f"{ifile.category}.py"),
+              ifile.import_lines,
               ifile.mapping] for ifile in ItemMaps.files()]
 
     for filename, ilines, mapping in files:
@@ -231,7 +259,7 @@ def writefiles(dirpath: str = DEFAULT_DIRPATH):
                     # value isn't falsy, that value will be a tuple and
                     # not a list...? Maybe a bug in mvPythonParser.
                     if "list" in para:
-                        para = para.replace("(","[").replace(")","]")
+                        para = para.replace("(", "[").replace(")", "]")
                     init_params.append(para)
                 if "id" in instance_attrs:
                     idx = instance_attrs.index("id")
@@ -257,7 +285,8 @@ def writefiles(dirpath: str = DEFAULT_DIRPATH):
                 if len(instance_attrs) == 0:
                     line += "**kwargs)\n"
                 elif len(instance_attrs) < 4:
-                    line += ", ".join(f"{attr}={attr}" for attr in instance_attrs) + ", **kwargs)\n"
+                    line += ", ".join(f"{attr}={attr}" for attr in instance_attrs) + \
+                        ", **kwargs)\n"
                 else:
                     line += f"\n{indent(2)}"
                     line += f",\n{indent(2)}".join(
@@ -266,17 +295,18 @@ def writefiles(dirpath: str = DEFAULT_DIRPATH):
                 clslines.append(line)
 
                 # instance attributes
-                line = "".join(f"{indent(2)}self.{attr} = {attr}\n" for attr in instance_attrs)
+                line = "".join(
+                    f"{indent(2)}self.{attr} = {attr}\n" for attr in instance_attrs)
                 clslines.append(line)
-                
+
                 pyfile.writelines(clslines)
-    
+
     # __init__.py
-    with open(Path(dirpath,"__init__.py"), "w") as pyfile:
+    with open(Path(dirpath, "__init__.py"), "w") as pyfile:
         lines = [
-                    "from dearpygui import dearpygui as dpg\n",
-                    "\n",
-                ]
+            "from dearpygui import dearpygui as dpg\n",
+            "\n",
+        ]
 
         # __all__
         line = f"__all__ = [\n"
@@ -285,10 +315,10 @@ def writefiles(dirpath: str = DEFAULT_DIRPATH):
         lines.append(line)
 
         lines += [
-                    f"__updated__ = '{datetime.today().date()}'\n",
-                    f"__dpg_ver__ = '{dpg.get_dearpygui_version()}'\n",
-                 ]
-        
+            f"__updated__ = '{datetime.today().date()}'\n",
+            f"__dpg_ver__ = '{dpg.get_dearpygui_version()}'\n",
+        ]
+
         pyfile.writelines(lines)
 
 
