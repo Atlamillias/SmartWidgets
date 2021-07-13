@@ -86,4 +86,4 @@ class Context:  # mixin
         return self
 
     def __exit__(self, exec_type, exec_value, traceback):
-        dpg.pop_container_stack(self.id)
+        dpg.pop_container_stack()
