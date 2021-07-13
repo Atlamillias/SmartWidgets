@@ -1,7 +1,7 @@
 from typing import Callable, Any
 
 from . import dpg
-from ._item import Item, Context
+from ._item import Item, ContextSupport
 
 
 ##################################################
@@ -9,7 +9,7 @@ from ._item import Item, Context
 ##################################################
 
 
-class FontRegistry(Item, Context):
+class FontRegistry(Item, ContextSupport):
     _command: Callable = dpg.add_font_registry
 
     def __init__(self, label: str = None, show: bool = True, user_data: Any = None, **kwargs):
@@ -19,7 +19,7 @@ class FontRegistry(Item, Context):
         self.user_data = user_data
 
 
-class HandlerRegistry(Item, Context):
+class HandlerRegistry(Item, ContextSupport):
     _command: Callable = dpg.add_handler_registry
 
     def __init__(self, label: str = None, show: bool = True, user_data: Any = None, **kwargs):
@@ -29,7 +29,7 @@ class HandlerRegistry(Item, Context):
         self.user_data = user_data
 
 
-class TextureRegistry(Item, Context):
+class TextureRegistry(Item, ContextSupport):
     _command: Callable = dpg.add_texture_registry
 
     def __init__(self, label: str = None, user_data: Any = None, show: bool = False, **kwargs):
@@ -39,7 +39,7 @@ class TextureRegistry(Item, Context):
         self.show = show
 
 
-class ValueRegistry(Item, Context):
+class ValueRegistry(Item, ContextSupport):
     _command: Callable = dpg.add_value_registry
 
     def __init__(self, label: str = None, user_data: Any = None, **kwargs):

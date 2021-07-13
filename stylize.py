@@ -1,7 +1,7 @@
 from typing import Callable, Any
 
 from . import dpg
-from ._item import Item, Context
+from ._item import Item, ContextSupport
 
 
 ##################################################
@@ -147,7 +147,7 @@ class ThemeStyle(Item):
         self.category = category
 
 
-class Theme(Item, Context):
+class Theme(Item, ContextSupport):
     _command: Callable = dpg.add_theme
 
     def __init__(self, label: str = None, user_data: Any = None, default_theme: bool = False, **kwargs):
@@ -157,7 +157,7 @@ class Theme(Item, Context):
         self.default_theme = default_theme
 
 
-class Font(Item, Context):
+class Font(Item, ContextSupport):
     _command: Callable = dpg.add_font
 
     def __init__(

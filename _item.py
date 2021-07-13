@@ -80,7 +80,7 @@ class Item(metaclass=ABCMeta):
         return dpg.get_item_configuration(self.__id)
 
 
-class Context:  # mixin
+class ContextSupport:  # mixin
     def __enter__(self):
         dpg.push_container_stack(self.id)
         return self

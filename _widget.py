@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 from typing import Callable
 
 from . import dpg
-from ._item import Item, Context
+from ._item import Item, ContextSupport
 
 
 class Widget(Item, metaclass=ABCMeta):
@@ -25,6 +25,6 @@ class Widget(Item, metaclass=ABCMeta):
 
 
 
-class Container(Widget, Context, metaclass=ABCMeta):
+class Container(Widget, ContextSupport, metaclass=ABCMeta):
     @abstractmethod
     def _command() -> Callable: ...
