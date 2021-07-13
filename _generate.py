@@ -142,7 +142,7 @@ def _organize(mapping: dict):
 
 def _backup_existing():
     for pyfile in Path(DEFAULT_DIR).iterdir():
-        if pyfile.stem.startswith("_") and not pyfile.stem != "__init__":
+        if pyfile.stem.startswith("_") and pyfile.stem != "__init__":
             continue
 
         if pyfile.suffix == ".py":
