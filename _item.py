@@ -14,7 +14,7 @@ class Item(metaclass=ABCMeta):
         if parent := kwargs.pop("parent", None):
             kwargs["parent"] = int(parent)
 
-        kwargs["label"] = kwargs.get('label', self.__class__.__name__)
+        kwargs["label"] = kwargs.get('label') or self.__class__.__name__
         self.__id = self.__class__._command(**kwargs)
 
         self.__config = {optn for optn in kwargs.keys()}
