@@ -4,7 +4,6 @@ from typing import Callable
 from . import dpg
 
 
-
 class Item(metaclass=ABCMeta):
     @abstractmethod
     def _command() -> Callable: ...
