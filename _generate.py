@@ -47,9 +47,9 @@ class ItemMaps:
     # organized into categories. They are populated as:
     # "Item": ("baseclasses", "dpg_command"). Even though the
     # items hard-coded below are all containers, some inherit
-    # from "Item, Context" which is basically the "Container"
+    # from "Item, ContextSupport" which is basically the "Container"
     # class without "extras" (handlers, themes, etc). Items that
-    # subclass the Item and Context classes add those extras to
+    # subclass the Item and ContextSupport classes add those extras to
     # items subclassing Container and Widget.
 
     containers = ItemFile(
@@ -112,12 +112,12 @@ class ItemMaps:
     )
     registries = ItemFile(
         "registries",
-        ["from ._item import Item, Context"],
+        ["from ._item import Item, ContextSupport"],
         {
-            "FontRegistry": ("Item, Context", "add_font_registry"),
-            "HandlerRegistry": ("Item, Context", "add_handler_registry"),
-            "TextureRegistry": ("Item, Context", "add_texture_registry"),
-            "ValueRegistry": ("Item, Context", "add_value_registry"),
+            "FontRegistry": ("Item, ContextSupport", "add_font_registry"),
+            "HandlerRegistry": ("Item, ContextSupport", "add_handler_registry"),
+            "TextureRegistry": ("Item, ContextSupport", "add_texture_registry"),
+            "ValueRegistry": ("Item, ContextSupport", "add_value_registry"),
         }
     )
     handlers = ItemFile(
@@ -127,10 +127,10 @@ class ItemMaps:
     )
     stylize = ItemFile(
         "stylize",
-        ["from ._item import Item, Context"],
+        ["from ._item import Item, ContextSupport"],
         {
-            "Theme": ("Item, Context", "add_theme"),
-            "Font": ("Item, Context", "add_font"),
+            "Theme": ("Item, ContextSupport", "add_theme"),
+            "Font": ("Item, ContextSupport", "add_font"),
         }
     )
 
@@ -166,7 +166,7 @@ def populate():
                 or attr in typing.__all__]
 
     for index, line in enumerate(lines):
-        if line.startswith("@contextmanager"):
+        if line.startswith("@ContextSupportmanager"):
             name = lines[index + 1].split("(")[0].replace("def ", "")
             func_str = f"add_{name}"
             if func_str in commands or func_str not in core_dir:
@@ -190,7 +190,7 @@ def populate():
                 mapping, info = ItemMaps.node.mapping, ("Widget", attr)
             elif attr.endswith("_registry"):
                 mapping, info = ItemMaps.registries.mapping, (
-                    "Item, Context", attr)
+                    "Item, ContextSupport", attr)
             elif attr.endswith("_value"):
                 mapping, info = ItemMaps.valueitems.mapping, ("Item", attr)
             elif attr.endswith("_handler"):
