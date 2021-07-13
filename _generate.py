@@ -5,10 +5,10 @@ from inspect import signature, getfile
 import shutil
 import typing
 
-from dearpygui import dearpygui as dpg, core as idpg
+from dearpygui import dearpygui as dpg, _dearpygui as idpg
 
 
-DEFAULT_DIR = "./dpgwrap"
+DEFAULT_DIR = "./"
 DEFAULT_BACKUP_DIR = "./backup"
 
 DPG_CONSTANTS = {}
