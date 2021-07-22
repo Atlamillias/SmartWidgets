@@ -142,12 +142,8 @@ def _organize(mapping: dict):
 
 def _backup_existing():
     for pyfile in Path(DEFAULT_DIR).iterdir():
-        if pyfile.stem.startswith("_") and pyfile.stem != "__init__":
-            continue
-
         if pyfile.suffix == ".py":
             shutil.copy(str(pyfile), DEFAULT_BACKUP_DIR)
-
 
 
 def populate():
@@ -258,14 +254,9 @@ def writefiles(dirpath: str = DEFAULT_DIR):
                     para = str(para)
                     # Some type hints are unnecessarily used from the
                     # typing module. Python 3.9 supports using
-                    # the built-in types as hints.
+                    # built-in types as typehints.
                     for t in ("List", "Tuple", "Dict", "Set"):
                         para = para.replace(t, t.lower())
-                    # For some reason if the hint is list and the default
-                    # value isn't falsy, that value will be a tuple and
-                    # not a list...? Maybe a bug in mvPythonParser.
-                    if "list" in para:
-                        para = para.replace("(", "[").replace(")", "]")
                     init_params.append(para)
                 if "id" in instance_attrs:
                     idx = instance_attrs.index("id")
