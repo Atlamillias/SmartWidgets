@@ -7,9 +7,10 @@ import typing
 
 from dearpygui import dearpygui as dpg, _dearpygui as idpg
 
+# TODO: Generate constants.py.
+# TODO: Include dogstrings.
 
-DEFAULT_DIR = "./"
-DEFAULT_BACKUP_DIR = "./backup"
+DPGWRAP_DIR = str(Path(__file__).parent)
 
 DPG_CONSTANTS = {}
 
@@ -140,12 +141,6 @@ def _organize(mapping: dict):
     return mapping
 
 
-def _backup_existing():
-    for pyfile in Path(DEFAULT_DIR).iterdir():
-        if pyfile.suffix == ".py":
-            shutil.copy(str(pyfile), DEFAULT_BACKUP_DIR)
-
-
 def populate():
     def name_fix(string):  # if name starts with any number
         if string[0].isdigit():
@@ -162,7 +157,7 @@ def populate():
                 or attr in typing.__all__]
 
     for index, line in enumerate(lines):
-        if line.startswith("@ContextSupportmanager"):
+        if line.startswith("@contextmanager"):
             name = lines[index + 1].split("(")[0].replace("def ", "")
             func_str = f"add_{name}"
             if func_str in commands or func_str not in core_dir:
@@ -208,12 +203,10 @@ def populate():
             DPG_CONSTANTS[attr.replace("mv", "")] = attr
 
 
-def writefiles(dirpath: str = DEFAULT_DIR):
+def writefiles(dirpath: str = DPGWRAP_DIR):
     def indent(indents: int = 1):
         ind = "    " * indents
         return ind
-
-    _backup_existing()
 
     files = [[Path(dirpath, f"{ifile.category}.py"),
               ifile.import_lines,
