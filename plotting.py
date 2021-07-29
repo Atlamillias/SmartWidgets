@@ -27,7 +27,7 @@ class Plot(Container):
         show: bool = True,
         pos: list[int] = [],
         filter_key: str = '',
-        delay_search: str = False,
+        delay_search: bool = False,
         tracked: bool = False,
         track_offset: float = 0.5,
         user_data: Any = None,
@@ -41,6 +41,18 @@ class Plot(Container):
         crosshairs: bool = False,
         anti_aliased: bool = False,
         equal_aspects: bool = False,
+        pan_button: int = 0,
+        pan_mod: int = -1,
+        fit_button: int = 0,
+        context_menu_button: int = 1,
+        box_select_button: int = 1,
+        box_select_mod: int = -1,
+        box_select_cancel_button: int = 0,
+        query_button: int = 2,
+        query_mod: int = -1,
+        query_toggle_mod: int = 17,
+        horizontal_mod: int = 18,
+        vertical_mod: int = 16,
         **kwargs
     ):
         super().__init__(
@@ -71,6 +83,18 @@ class Plot(Container):
         crosshairs=crosshairs,
         anti_aliased=anti_aliased,
         equal_aspects=equal_aspects,
+        pan_button=pan_button,
+        pan_mod=pan_mod,
+        fit_button=fit_button,
+        context_menu_button=context_menu_button,
+        box_select_button=box_select_button,
+        box_select_mod=box_select_mod,
+        box_select_cancel_button=box_select_cancel_button,
+        query_button=query_button,
+        query_mod=query_mod,
+        query_toggle_mod=query_toggle_mod,
+        horizontal_mod=horizontal_mod,
+        vertical_mod=vertical_mod,
         **kwargs
         )
         self.label = label
@@ -100,6 +124,18 @@ class Plot(Container):
         self.crosshairs = crosshairs
         self.anti_aliased = anti_aliased
         self.equal_aspects = equal_aspects
+        self.pan_button = pan_button
+        self.pan_mod = pan_mod
+        self.fit_button = fit_button
+        self.context_menu_button = context_menu_button
+        self.box_select_button = box_select_button
+        self.box_select_mod = box_select_mod
+        self.box_select_cancel_button = box_select_cancel_button
+        self.query_button = query_button
+        self.query_mod = query_mod
+        self.query_toggle_mod = query_toggle_mod
+        self.horizontal_mod = horizontal_mod
+        self.vertical_mod = vertical_mod
 
 
 class HistogramSeries(Widget):
@@ -172,7 +208,7 @@ class AreaSeries(Widget):
         source: int = 0,
         show: bool = True,
         user_data: Any = None,
-        fill: list[int] = [0, 0, 0, -255],
+        fill: list[int] = (0, 0, 0, -255),
         contribute_to_bounds: bool = True,
         **kwargs
     ):
@@ -259,8 +295,8 @@ class CandleSeries(Widget):
         source: int = 0,
         show: bool = True,
         user_data: Any = None,
-        bull_color: list[int] = [0, 255, 113, 255],
-        bear_color: list[int] = [218, 13, 79, 255],
+        bull_color: list[int] = (0, 255, 113, 255),
+        bear_color: list[int] = (218, 13, 79, 255),
         weight: int = 0.25,
         tooltip: bool = True,
         **kwargs
@@ -313,7 +349,7 @@ class DragPoint(Widget):
         show: bool = True,
         user_data: Any = None,
         default_value: Any = (0.0, 0.0),
-        color: list[int] = [0, 0, 0, -255],
+        color: list[int] = (0, 0, 0, -255),
         thickness: float = 1.0,
         show_label: bool = True,
         **kwargs
@@ -500,9 +536,9 @@ class ImageSeries(Widget):
         source: int = 0,
         show: bool = True,
         user_data: Any = None,
-        uv_min: list[float] = [0.0, 0.0],
-        uv_max: list[float] = [1.0, 1.0],
-        tint_color: list[int] = [255, 255, 255, 255],
+        uv_min: list[float] = (0.0, 0.0),
+        uv_max: list[float] = (1.0, 1.0),
+        tint_color: list[int] = (255, 255, 255, 255),
         **kwargs
     ):
         super().__init__(
@@ -636,8 +672,8 @@ class PlotAnnotation(Widget):
         show: bool = True,
         user_data: Any = None,
         default_value: Any = (0.0, 0.0),
-        offset: list[float] = [0.0, 0.0],
-        color: list[int] = [0, 0, 0, -255],
+        offset: list[float] = (0.0, 0.0),
+        color: list[int] = (0, 0, 0, -255),
         clamped: bool = True,
         **kwargs
     ):
@@ -863,7 +899,7 @@ class SimplePlot(Widget):
         tracked: bool = False,
         track_offset: float = 0.5,
         user_data: Any = None,
-        default_value: list[float] = [],
+        default_value: list[float] = (),
         overlay: str = '',
         histogram: bool = False,
         autosize: bool = True,
@@ -991,99 +1027,6 @@ class StemSeries(Widget):
         self.source = source
         self.show = show
         self.user_data = user_data
-
-
-class Subplots(Widget):
-    _command: Callable = dpg.add_subplots
-
-    def __init__(
-        self,
-        rows: int,
-        columns: int,
-        label: str = None,
-        width: int = 0,
-        height: int = 0,
-        indent: int = -1,
-        parent: int = 0,
-        before: int = 0,
-        callback: Callable = None,
-        show: bool = True,
-        pos: list[int] = [],
-        filter_key: str = '',
-        delay_search: str = False,
-        tracked: bool = False,
-        track_offset: float = 0.5,
-        user_data: Any = None,
-        row_ratios: list[float] = [],
-        column_ratios: list[float] = [],
-        no_title: bool = False,
-        no_menus: bool = False,
-        no_resize: bool = False,
-        no_align: bool = False,
-        link_rows: bool = False,
-        link_columns: bool = False,
-        link_all_x: bool = False,
-        link_all_y: bool = False,
-        column_major: bool = False,
-        **kwargs
-    ):
-        super().__init__(
-        rows=rows,
-        columns=columns,
-        label=label,
-        width=width,
-        height=height,
-        indent=indent,
-        parent=parent,
-        before=before,
-        callback=callback,
-        show=show,
-        pos=pos,
-        filter_key=filter_key,
-        delay_search=delay_search,
-        tracked=tracked,
-        track_offset=track_offset,
-        user_data=user_data,
-        row_ratios=row_ratios,
-        column_ratios=column_ratios,
-        no_title=no_title,
-        no_menus=no_menus,
-        no_resize=no_resize,
-        no_align=no_align,
-        link_rows=link_rows,
-        link_columns=link_columns,
-        link_all_x=link_all_x,
-        link_all_y=link_all_y,
-        column_major=column_major,
-        **kwargs
-        )
-        self.rows = rows
-        self.columns = columns
-        self.label = label
-        self.width = width
-        self.height = height
-        self.indent = indent
-        self.parent = parent
-        self.before = before
-        self.callback = callback
-        self.show = show
-        self.pos = pos
-        self.filter_key = filter_key
-        self.delay_search = delay_search
-        self.tracked = tracked
-        self.track_offset = track_offset
-        self.user_data = user_data
-        self.row_ratios = row_ratios
-        self.column_ratios = column_ratios
-        self.no_title = no_title
-        self.no_menus = no_menus
-        self.no_resize = no_resize
-        self.no_align = no_align
-        self.link_rows = link_rows
-        self.link_columns = link_columns
-        self.link_all_x = link_all_x
-        self.link_all_y = link_all_y
-        self.column_major = column_major
 
 
 class TextPoint(Widget):

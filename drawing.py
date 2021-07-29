@@ -17,7 +17,7 @@ class ViewportDrawlist(Container):
         label: str = None,
         show: bool = True,
         filter_key: str = '',
-        delay_search: str = False,
+        delay_search: bool = False,
         user_data: Any = None,
         front: bool = True,
         **kwargs
@@ -56,7 +56,7 @@ class Drawlist(Container):
         show: bool = True,
         pos: list[int] = [],
         filter_key: str = '',
-        delay_search: str = False,
+        delay_search: bool = False,
         tracked: bool = False,
         track_offset: float = 0.5,
         user_data: Any = None,
@@ -138,7 +138,7 @@ class Arrow(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
+        color: list[int] = (255, 255, 255, 255),
         thickness: float = 1.0,
         size: int = 4,
         **kwargs
@@ -182,7 +182,7 @@ class BezierCubic(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
+        color: list[int] = (255, 255, 255, 255),
         thickness: float = 1.0,
         segments: int = 0,
         **kwargs
@@ -229,7 +229,7 @@ class BezierQuadratic(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
+        color: list[int] = (255, 255, 255, 255),
         thickness: float = 1.0,
         segments: int = 0,
         **kwargs
@@ -273,8 +273,8 @@ class Circle(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
-        fill: list[int] = [0, 0, 0, -255],
+        color: list[int] = (255, 255, 255, 255),
+        fill: list[int] = (0, 0, 0, -255),
         thickness: float = 1.0,
         segments: int = 0,
         **kwargs
@@ -318,8 +318,8 @@ class Ellipse(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
-        fill: list[int] = [0, 0, 0, -255],
+        color: list[int] = (255, 255, 255, 255),
+        fill: list[int] = (0, 0, 0, -255),
         thickness: float = 1.0,
         segments: int = 32,
         **kwargs
@@ -364,9 +364,9 @@ class Image(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        uv_min: list[float] = [0.0, 0.0],
-        uv_max: list[float] = [1.0, 1.0],
-        color: list[int] = [255, 255, 255, 255],
+        uv_min: list[float] = (0.0, 0.0),
+        uv_max: list[float] = (1.0, 1.0),
+        color: list[int] = (255, 255, 255, 255),
         **kwargs
     ):
         super().__init__(
@@ -408,7 +408,7 @@ class Line(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
+        color: list[int] = (255, 255, 255, 255),
         thickness: float = 1.0,
         **kwargs
     ):
@@ -446,8 +446,8 @@ class Polygon(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
-        fill: list[int] = [0, 0, 0, -255],
+        color: list[int] = (255, 255, 255, 255),
+        fill: list[int] = (0, 0, 0, -255),
         thickness: float = 1.0,
         **kwargs
     ):
@@ -486,7 +486,7 @@ class Polyline(Widget):
         show: bool = True,
         user_data: Any = None,
         closed: bool = False,
-        color: list[int] = [255, 255, 255, 255],
+        color: list[int] = (255, 255, 255, 255),
         thickness: float = 1.0,
         **kwargs
     ):
@@ -527,8 +527,8 @@ class Quad(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
-        fill: list[int] = [0, 0, 0, -255],
+        color: list[int] = (255, 255, 255, 255),
+        fill: list[int] = (0, 0, 0, -255),
         thickness: float = 1.0,
         **kwargs
     ):
@@ -573,8 +573,8 @@ class Rectangle(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
-        fill: list[int] = [0, 0, 0, -255],
+        color: list[int] = (255, 255, 255, 255),
+        fill: list[int] = (0, 0, 0, -255),
         rounding: float = 0.0,
         thickness: float = 1.0,
         **kwargs
@@ -618,8 +618,8 @@ class Text(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
-        size: int = 10,
+        color: list[int] = (255, 255, 255, 255),
+        size: float = 10.0,
         **kwargs
     ):
         super().__init__(
@@ -658,8 +658,8 @@ class Triangle(Widget):
         before: int = 0,
         show: bool = True,
         user_data: Any = None,
-        color: list[int] = [255, 255, 255, 255],
-        fill: list[int] = [0, 0, 0, -255],
+        color: list[int] = (255, 255, 255, 255),
+        fill: list[int] = (0, 0, 0, -255),
         thickness: float = 1.0,
         **kwargs
     ):
