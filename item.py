@@ -1,8 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Callable
 
-from . import dpg
-from dearpygui import _dearpygui as idpg
+from dearpygui import dearpygui as dpg, _dearpygui as idpg
 
 
 class Item(metaclass=ABCMeta):

@@ -1,15 +1,23 @@
-from dearpygui import dearpygui as dpg
 
-__all__ = [
-    'containers',
-    'drawing',
-    'handlers',
-    'node',
-    'plotting',
-    'registries',
-    'stylize',
-    'valueitems',
-    'widgets',]
+import warnings
+import _writelib
 
-__updated__ = '2021-07-29'
-__dpg_ver__ = '0.8.50'
+AUTO_UPDATE = True
+
+def update_library():
+    try:
+        _writelib.main()
+    except PermissionError as e:
+        warnings.warn(f"A PermissionError was raised trying to update the library - {str(e)}.")
+
+if AUTO_UPDATE and __name__ != "__main__":
+    update_library()
+
+
+
+import lib
+from lib import *
+
+
+__all__ = [*lib.__all__, "item", "widget", "update_library"]
+
