@@ -27,7 +27,7 @@ _WIDGETS_ = PyTextNamespace(_widget, imports=[Container, Widget])
 
 # paths
 CWD = Path(__file__).parent
-DIRPATH = CWD / "lib"
+DIRPATH = CWD / "libsrc"
 
 
 PYFILES: dict[str, PyFile] = {}
